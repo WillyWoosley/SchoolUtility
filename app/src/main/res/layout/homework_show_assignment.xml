@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/show_homework_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:id="@+id/show_homework_description"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_homework_name"
+        android:layout_marginTop="17dp"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="@string/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ok_button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:text="@string/due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_above="@+id/ok_button"
+        android:layout_alignRight="@+id/show_homework_description"
+        android:layout_alignEnd="@+id/show_homework_description" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:id="@+id/show_due_date"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignLeft="@+id/show_homework_description"
+        android:layout_alignStart="@+id/show_homework_description"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+</RelativeLayout>
