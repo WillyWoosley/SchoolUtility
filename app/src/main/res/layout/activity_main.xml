@@ -9,6 +9,7 @@
 
     <fragment
         android:name="com.gamecodeschool.schoolutility.MenubarFragment"
+        android:id="@+id/mainMenubar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
