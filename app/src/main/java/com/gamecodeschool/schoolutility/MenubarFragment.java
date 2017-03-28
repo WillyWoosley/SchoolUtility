@@ -2,8 +2,10 @@ package com.gamecodeschool.schoolutility;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,18 +58,17 @@ public class MenubarFragment extends Fragment {
                 }
         );
     }
-/*
+
     @Override
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
 
         try {
-            mCallback = (OnImageSelectedListener) activity;
+            mListener = (OnFragmentInteractionListener) activity;
         }
         catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnImageSelectedListener");
         }
     }
-    */
 }

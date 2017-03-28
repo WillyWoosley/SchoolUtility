@@ -17,17 +17,24 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements MenubarFragment.OnFragmentInteractionListener {
 
 
     //Member variables
     HomeworkAssignment mPassedHomework = new HomeworkAssignment();
     private HomeworkAdapter mHomeworkAdapter;
     //
+
+    public void onFragmentInteraction(int position)
+    {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,17 +73,15 @@ public class MainActivity extends AppCompatActivity {
         //placeholder button to check functionality of homework assigning
         Button assignmentShow = (Button) findViewById(R.id.placeholder_retrieve);
 
+        final Intent testIntent = new Intent(this, HomeworkActivity.class);
+
         assignmentShow.setOnClickListener(
                 new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
-                        DialogShowHomework showWork = new DialogShowHomework();
-
-                        showWork.sendHomework(mPassedHomework);
-
-                        showWork.show(getFragmentManager(), "123");
+                       startActivity(testIntent);
                     }
                 }
         );

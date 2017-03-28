@@ -3,18 +3,12 @@ package com.gamecodeschool.schoolutility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class HomeworkActivity extends AppCompatActivity
-    implements MenubarFragment.OnFragmentInteractionListener {
+public class EventsActivity extends AppCompatActivity {
 
-    public void onFragmentInteraction(int position)
-    {
-
-    }
-
+    //Placeholder activity for EventsActivity, here to get menubar working
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homework);
+        setContentView(R.layout.activity_events);
     }
-
 }
