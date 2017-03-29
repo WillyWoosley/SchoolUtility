@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Please enter the complete URL of your article:"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:hint="URL" />
+
+    <TextView
+        android:id="@+id/queryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pagePreview"
+        android:layout_alignStart="@+id/pagePreview"
+        android:layout_below="@+id/editText"
+        android:text="Is this your article?"
+        android:textColor="@android:color/black" />
+
+    <WebView
+        android:id="@+id/pagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_below="@id/queryText"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+    </WebView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_alignBaseline="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignLeft="@+id/pagePreview"
+        android:layout_alignStart="@+id/pagePreview" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:layout_marginTop="11dp"
+        android:id="@+id/button"
+        android:layout_below="@+id/pagePreview"
+        android:layout_alignRight="@+id/pagePreview"
+        android:layout_alignEnd="@+id/pagePreview" />
+
+
+
+
+</RelativeLayout>

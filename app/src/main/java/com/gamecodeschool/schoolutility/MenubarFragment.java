@@ -43,9 +43,15 @@ public class MenubarFragment extends Fragment {
         ImageButton contactsSwap = (ImageButton) getView().findViewById(R.id.mainContacts);
         ImageButton homeworkSwap = (ImageButton) getView().findViewById(R.id.mainHomework);
         ImageButton eventsSwap = (ImageButton) getView().findViewById(R.id.mainEvents);
+        ImageButton mainSwap = (ImageButton) getView().findViewById(R.id.mainPage);
 
         //Creates Intents for all buttons
         final Intent homeworkIntent = new Intent(getActivity(), HomeworkActivity.class);
+        final Intent newsIntent = new Intent(getActivity(), NewsActivity.class);
+        final Intent contactsIntent = new Intent(getActivity(), ContactsActivity.class);
+        final Intent eventsIntent = new Intent(getActivity(), EventsActivity.class);
+        final Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+
 
         homeworkSwap.setOnClickListener(
                 new View.OnClickListener()
@@ -54,6 +60,50 @@ public class MenubarFragment extends Fragment {
                     public void onClick(View v)
                     {
                         startActivity(homeworkIntent);
+                    }
+                }
+        );
+
+        newsSwap.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivity(newsIntent);
+                    }
+                }
+        );
+
+        contactsSwap.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivity(contactsIntent);
+                    }
+                }
+        );
+
+        eventsSwap.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivity(eventsIntent);
+                    }
+                }
+        );
+
+        mainSwap.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivity(mainIntent);
                     }
                 }
         );

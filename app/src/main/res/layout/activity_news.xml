@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gamecodeschool.schoolutility.NewsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/testWebView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+
+    <fragment
+        android:name="com.gamecodeschool.schoolutility.MenubarFragment"
+        android:id="@+id/newsMenubar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        tools:layout="@layout/menubar_fragment" />
+
+</RelativeLayout>

@@ -26,6 +26,26 @@ public class MainActivity extends AppCompatActivity
     implements MenubarFragment.OnFragmentInteractionListener {
 
 
+    //General to-do's
+    //TODO: URGENT: Need to implement JSONSerialization for tomorrow, homewokr views disappear when you click to a different activity since they aren't being saved anywhere
+    //TODO: Get contact working, with placeholder contacts and ideally a working searchbar, assuming that google already has a pretty well made searchbar provided
+    //TODO: Make the article assign dialog appear, and actually do something more than appear (save the information somewhere)
+    //TODO: Make all data persistent locally for now
+    //TODO: Make events work. Not sure how this is going to look/work, not pressing for the demo
+    //TODO: Make the contacts activity layout
+    //TODO: Make the events activity layout
+    //TODO: Make the news page layout
+    //TODO: Make a settings page
+    //TODO: Fill in the main activity layout
+    //TODO: Make the homework page layout
+    //TODO: Make a placeholder image to be contained in the listview if there is no homework the user currently has assigned/to do
+    //TODO: Add ability to check off homework assignments from the list to set them as complete
+    //TODO: Make the homework listview items images/background vary based upon assignment type/class
+    //TODO: Fill in menubar placeholder assets with real images
+
+    //Completed:
+    //TODO: Add mainActivity to menubar
+
     //Member variables
     HomeworkAssignment mPassedHomework = new HomeworkAssignment();
     private HomeworkAdapter mHomeworkAdapter;

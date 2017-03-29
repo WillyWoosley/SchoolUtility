@@ -6,15 +6,16 @@ import android.os.Bundle;
 public class HomeworkActivity extends AppCompatActivity
     implements MenubarFragment.OnFragmentInteractionListener {
 
-    public void onFragmentInteraction(int position)
-    {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homework);
     }
 
+    @Override
+    public void onFragmentInteraction(int position)
+    {
+        //placeholder interaction listener which must be implemented
+        //and can be filled with specific actions to be taken when clicked
+    }
 }

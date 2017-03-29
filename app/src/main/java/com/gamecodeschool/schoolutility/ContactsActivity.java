@@ -3,12 +3,18 @@ package com.gamecodeschool.schoolutility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ContactsActivity extends AppCompatActivity {
-
-    //Placeholder activity for ContactsActivity, here to get menubar working
-    @Override
+public class ContactsActivity extends AppCompatActivity
+        implements MenubarFragment.OnFragmentInteractionListener {
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+    }
+
+    @Override
+    public void onFragmentInteraction(int position)
+    {
+        //placeholder interaction listener which must be implemented
+        //and can be filled with specific actions to be taken when clicked
     }
 }

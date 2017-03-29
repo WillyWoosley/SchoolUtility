@@ -14,6 +14,14 @@
         app:srcCompat="@android:drawable/alert_dark_frame" />
 
     <ImageButton
+        android:id="@+id/mainPage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"
+        app:srcCompat="@android:drawable/btn_star" />
+
+    <ImageButton
         android:id="@+id/mainContacts"
         android:layout_width="0dp"
         android:layout_height="match_parent"

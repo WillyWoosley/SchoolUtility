@@ -18,4 +18,6 @@ public class JSONSerializer {
         mContext = c;
     }
 
+    //Placeholder where JSONSerialization will take place eventually (assuming this is compatible with the database we use)
+
 }
