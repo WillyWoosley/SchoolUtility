@@ -7,38 +7,25 @@
     android:layout_height="match_parent"
     tools:context="com.gamecodeschool.schoolutility.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".05"
+        app:srcCompat="@drawable/pcs_logo" />
+
     <fragment
-        android:name="com.gamecodeschool.schoolutility.MenubarFragment"
         android:id="@+id/mainMenubar"
+        android:name="com.gamecodeschool.schoolutility.MenubarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         tools:layout="@layout/menubar_fragment" />
 
-    <Button
-        android:id="@+id/placeholder_assign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Assignment"
-        android:layout_alignBaseline="@+id/placeholder_retrieve"
-        android:layout_alignBottom="@+id/placeholder_retrieve"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/placeholder_retrieve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retrieve Assignment"
-        android:layout_marginBottom="101dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <ListView
         android:id="@+id/homework_listview_display"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />

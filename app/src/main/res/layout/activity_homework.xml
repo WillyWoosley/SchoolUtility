@@ -14,6 +14,13 @@
         android:layout_alignParentBottom="true"
         tools:layout="@layout/menubar_fragment" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".05"
+        app:srcCompat="@drawable/pcs_logo" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

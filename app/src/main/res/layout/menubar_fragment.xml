@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
         android:id="@+id/mainHomework"
@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@android:color/darker_gray"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@android:drawable/checkbox_on_background" />
 
     <ImageButton
         android:id="@+id/mainEvents"

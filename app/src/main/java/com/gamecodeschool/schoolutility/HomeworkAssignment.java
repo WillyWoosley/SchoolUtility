@@ -1,18 +1,42 @@
 package com.gamecodeschool.schoolutility;
 
+import android.provider.ContactsContract;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by wdwoo on 3/15/2017.
  */
 
+//TODO:Implement the rest of the variables which can be assigned to a homework assignment and make sure to implement them in all the necesary areas
 public class HomeworkAssignment {
 
-    String assignmentName;
-    String assignmentDescription;
-    String assignmentType;
-    String classType;
+    //Member Variables//
+    private String assignmentName;
+    private String assignmentDescription;
+    private String assignmentType;
+    private String classType;
+    private String dueDate;
 
-    //Placeholder class which will be used to be homework assignments, which will have the information from DialogAssignHomework stored
-    //in it and then reproduced wherever it is deemed necessary
+    //JSON Variables///
+    private static final String JSON_NAME = "assignment";
+    private static final String JSON_DESCRIPTION = "description";
+    private static final String JSON_DUEDATE = "01/01/01";
+    ////////////////////
+
+    public HomeworkAssignment(){
+        //empty constructor, necesary to have one which can have a JSON object fed
+    }
+
+    public HomeworkAssignment(JSONObject jo) throws JSONException
+    {
+        assignmentName = jo.getString(JSON_NAME);
+        assignmentDescription = jo.getString(JSON_DESCRIPTION);
+        dueDate = jo.getString(JSON_DUEDATE);
+    }
+
+
 
     public String getAssignmentDescription() {
         return assignmentDescription;
@@ -46,14 +70,23 @@ public class HomeworkAssignment {
         this.dueDate = dueDate;
     }
 
-    String dueDate;
-
     public String getAssignmentName() {
         return assignmentName;
     }
 
     public void setAssignmentName(String assignmentName) {
         this.assignmentName = assignmentName;
+    }
+
+    public JSONObject assignmentToJSON() throws JSONException
+    {
+        JSONObject jo = new JSONObject();
+
+        jo.put(JSON_NAME, assignmentName);
+        jo.put(JSON_DESCRIPTION, assignmentDescription);
+        jo.put(JSON_DUEDATE, dueDate);
+
+        return jo;
     }
 
 }

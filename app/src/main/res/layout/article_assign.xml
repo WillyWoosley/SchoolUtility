@@ -45,20 +45,21 @@
     </WebView>
 
     <Button
+        android:id="@+id/articleAssignCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:layout_alignBaseline="@+id/button"
-        android:layout_alignBottom="@+id/button"
+        android:layout_alignBaseline="@+id/articleAssignOk"
+        android:layout_alignBottom="@+id/articleAssignOk"
         android:layout_alignLeft="@+id/pagePreview"
-        android:layout_alignStart="@+id/pagePreview" />
+        android:layout_alignStart="@+id/pagePreview"
+        android:text="@string/cancel" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ok"
         android:layout_marginTop="11dp"
-        android:id="@+id/button"
+        android:id="@+id/articleAssignOk"
         android:layout_below="@+id/pagePreview"
         android:layout_alignRight="@+id/pagePreview"
         android:layout_alignEnd="@+id/pagePreview" />
