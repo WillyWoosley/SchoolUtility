@@ -1,6 +1,7 @@
 package com.gamecodeschool.schoolutility;
 
 import android.provider.ContactsContract;
+import android.support.annotation.StringDef;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,22 +19,16 @@ public class HomeworkAssignment {
     private String assignmentType;
     private String classType;
     private String dueDate;
-
-    //JSON Variables///
-    private static final String JSON_NAME = "assignment";
-    private static final String JSON_DESCRIPTION = "description";
-    private static final String JSON_DUEDATE = "01/01/01";
     ////////////////////
 
-    public HomeworkAssignment(){
+    public HomeworkAssignment() {
         //empty constructor, necesary to have one which can have a JSON object fed
     }
 
-    public HomeworkAssignment(JSONObject jo) throws JSONException
-    {
-        assignmentName = jo.getString(JSON_NAME);
-        assignmentDescription = jo.getString(JSON_DESCRIPTION);
-        dueDate = jo.getString(JSON_DUEDATE);
+    public HomeworkAssignment(String assignmentName, String assignmentDescription, String dueDate) {
+        this.assignmentName = assignmentName;
+        this.assignmentDescription = assignmentDescription;
+        this.dueDate = dueDate;
     }
 
 
@@ -78,15 +73,5 @@ public class HomeworkAssignment {
         this.assignmentName = assignmentName;
     }
 
-    public JSONObject assignmentToJSON() throws JSONException
-    {
-        JSONObject jo = new JSONObject();
-
-        jo.put(JSON_NAME, assignmentName);
-        jo.put(JSON_DESCRIPTION, assignmentDescription);
-        jo.put(JSON_DUEDATE, dueDate);
-
-        return jo;
-    }
 
 }

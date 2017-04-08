@@ -1,24 +1,18 @@
 package com.gamecodeschool.schoolutility;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +43,16 @@ public class MainActivity extends AppCompatActivity
 
 
     //Member variables//
+    public static final String ANONYMOUS = "anonymous";
+
+    public static final int RC_SIGN_IN = 1;
+
     private HomeworkAdapter mHomeworkAdapter;
+    private String mUsername;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mAssignmentDatabaseReference;
     ////////////////////
 
     public void onFragmentInteraction(int position) {
@@ -62,12 +65,39 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mHomeworkAdapter = new HomeworkAdapter();
+        mUsername = ANONYMOUS;
 
-        //Creates reference to homework ListView and sets the adapter to the member adapter
+        //Firebase references
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        //Firebase Database References
+        mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
+
+        //Sets up the HomeworkAssignment list, adapter, and ListView
+        List<HomeworkAssignment> homeworkAssignments = new ArrayList<>();
+        mHomeworkAdapter = new HomeworkAdapter(this, R.layout.homework_listview, homeworkAssignments);
         ListView listAssignment = (ListView) findViewById(R.id.homework_listview_display);
         listAssignment.setAdapter(mHomeworkAdapter);
 
+       mAssignmentDatabaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //TODO: Make this add all the other content that will be displayed on the main page
+                HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
+                mHomeworkAdapter.add(homeworkAssignment);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+
+        /*
         listAssignment.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -80,14 +110,33 @@ public class MainActivity extends AppCompatActivity
                         showHomework.show(getFragmentManager(), "");
                     }
                 }
-        );
-    }
+        );*/
 
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        mHomeworkAdapter.saveAssignments();
+        //Sets up AuthorizationListener
+        /*
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                //Sets up the ChildEventListner so long as user != null
+                if (user != null) {
+                    onSignedInInitialize(user.getDisplayName());
+                    Toast.makeText(MainActivity.this, "Welcome to Puma Planner!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //Initializes the FirebaseUI, allowing for user to create a new account
+                    onSignedOutCleanup();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setIsSmartLockEnabled(false)
+                            .setProviders(Arrays.asList(
+                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                            .build(), RC_SIGN_IN);
+                }
+            }
+        };*/
     }
 
     @Override
@@ -126,91 +175,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void createHomeworkAssignment(HomeworkAssignment h)
-    {
-        mHomeworkAdapter.addAssignment(h);
-    }
-
-
-    //Implements ListView and JSONSerializer for HomeworkAssignments and the homework listview
-    public class HomeworkAdapter extends BaseAdapter
-    {
-        List<HomeworkAssignment> homeworkList = new ArrayList<HomeworkAssignment>();
-        private JSONSerializer mSerializer;
-
-        public HomeworkAdapter()
-        {
-            mSerializer = new JSONSerializer("PumaPlanner.json", MainActivity.this.getApplicationContext());
-
-            try {
-                homeworkList = mSerializer.load();
-            }
-            catch(Exception e) {
-                homeworkList = new ArrayList<HomeworkAssignment>();
-                Log.e("Error loading notes: ", "", e);
-            }
-        }
-
-        @Override
-        public int getCount()
-        {
-            return homeworkList.size();
-        }
-
-        @Override
-        public long getItemId(int whichItem)
-        {
-            return whichItem;
-        }
-
-        @Override
-        public HomeworkAssignment getItem(int whichItem)
-        {
-            return homeworkList.get(whichItem);
-        }
-
-        @Override
-        public View getView(int whichItem, View view, ViewGroup viewGroup)
-        {
-            //Inflates view if it hasn't been
-            if (view==null) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.homework_listview, viewGroup, false);
-            }
-
-            //Create a reference to the assignment to be referenced
-            HomeworkAssignment tempAssignment = homeworkList.get(whichItem);
-
-            //Create references to all pertinent areas of layout
-            TextView assignmentName = (TextView) view.findViewById(R.id.assignment_name_display);
-            TextView dueDate = (TextView) view.findViewById(R.id.due_date_display);
-            ImageView assignmentImage = (ImageView) view.findViewById(R.id.assignment_imageView);
-
-            //Set the date, name, and image
-            assignmentName.setText(tempAssignment.getAssignmentName());
-            dueDate.setText(tempAssignment.getDueDate());
-            //TODO: Make it so that the imageview varies based upon class type or assignment type
-
-            return view;
-        }
-
-        public void addAssignment(HomeworkAssignment h)
-        {
-            homeworkList.add(h);
-            notifyDataSetChanged();
-        }
-
-        public void saveAssignments()
-        {
-            try {
-                mSerializer.saveHomework(homeworkList);
-            }
-            catch (Exception e) {
-                Log.e("Error saving notes: ", "", e);
-            }
-        }
     }
 
 }

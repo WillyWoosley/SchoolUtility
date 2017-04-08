@@ -22,7 +22,7 @@ import java.util.List;
  * Created by wdwoo on 3/25/2017.
  */
 
-public class JSONSerializer {
+/*public class JSONSerializer {
     //Member variables//
     private String mFilename;
     private Context mContext;
@@ -87,4 +87,4 @@ public class JSONSerializer {
 
         return assignmentsList;
     }
-}
+} */

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1062233581805",
+    "firebase_url": "https://pumastudio-162415.firebaseio.com",
+    "project_id": "pumastudio-162415",
+    "storage_bucket": "pumastudio-162415.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062233581805:android:f8109d78b026aef5",
+        "android_client_info": {
+          "package_name": "com.gamecodeschool.schoolutility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062233581805-m1ucqhla6fo9ak3uodce6na9stvmp90k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamecodeschool.schoolutility",
+            "certificate_hash": "45214348618eda55bf64bd182d02572a018688e2"
+          }
+        },
+        {
+          "client_id": "1062233581805-m9ucc257udf5cs4tqe3hq9l5ctgs7ti5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFDRh62TWk9KiA_68hkzj7uzAj72vlOZg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062233581805-m9ucc257udf5cs4tqe3hq9l5ctgs7ti5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

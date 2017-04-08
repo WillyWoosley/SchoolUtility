@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by wdwoo on 3/15/2017.
  */
 
 public class DialogAssignHomework extends DialogFragment {
-    //Placeholder class which will be used for teachers to assign homework, writing the information provided to HomeworkAssignment objects
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mHomeworkDatabaseReference;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -22,6 +27,10 @@ public class DialogAssignHomework extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.homework_assign_description, null);
+
+        //Initializes database and reference to assignments branch
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mHomeworkDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
 
         //References to all the objects in the dialog
         final EditText assignName = (EditText) dialogView.findViewById(R.id.assign_homework_title);
@@ -51,16 +60,10 @@ public class DialogAssignHomework extends DialogFragment {
                 {
                     public void onClick(View v)
                     {
-                        HomeworkAssignment homework = new HomeworkAssignment();
-
-                        //Retrieve user input for name, date, description and store it in homework object
-                        homework.setAssignmentName(assignName.getText().toString());
-                        homework.setAssignmentDescription(assignDescript.getText().toString());
-                        homework.setDueDate(assignDate.getText().toString());
-
-                        //Get a reference to MainActivity, and then pass the Homwork assignment to it
-                        MainActivity callingActivity = (MainActivity) getActivity();
-                        callingActivity.createHomeworkAssignment(homework);
+                        //Creates HomeworkAssignment with the passed parameters and then sends it to the database
+                        //TODO: This system needs to change so that different homework assignments will be stored in different children of the "assignments" branch
+                        HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString());
+                        mHomeworkDatabaseReference.push().setValue(homework);
 
                         dismiss();
                     }
