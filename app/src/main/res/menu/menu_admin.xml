@@ -26,4 +26,10 @@
         android:orderInCategory="4"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/signOut"
+        android:title="Sign Out"
+        android:orderInCategory="5"
+        app:showAsAction="never" />
+
 </menu>

@@ -1,13 +1,22 @@
 package com.gamecodeschool.schoolutility;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.appcompat.*;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.*;
+import com.firebase.ui.auth.BuildConfig;
+import com.google.android.gms.auth.api.Auth;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -51,8 +61,10 @@ public class MainActivity extends AppCompatActivity
     private String mUsername;
 
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListner;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
+    private ChildEventListener mAssignmentChildEventListner;
     ////////////////////
 
     public void onFragmentInteraction(int position) {
@@ -69,6 +81,7 @@ public class MainActivity extends AppCompatActivity
 
         //Firebase references
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         //Firebase Database References
         mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
@@ -79,25 +92,7 @@ public class MainActivity extends AppCompatActivity
         ListView listAssignment = (ListView) findViewById(R.id.homework_listview_display);
         listAssignment.setAdapter(mHomeworkAdapter);
 
-       mAssignmentDatabaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //TODO: Make this add all the other content that will be displayed on the main page
-                HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
-                mHomeworkAdapter.add(homeworkAssignment);
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
 
-
-        /*
         listAssignment.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -110,21 +105,21 @@ public class MainActivity extends AppCompatActivity
                         showHomework.show(getFragmentManager(), "");
                     }
                 }
-        );*/
+        );
 
-        //Sets up AuthorizationListener
-        /*
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        mAuthStateListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                //Sets up the ChildEventListner so long as user != null
+                //Sets up ChildEventListner so long as user is logged in
                 if (user != null) {
                     onSignedInInitialize(user.getDisplayName());
-                    Toast.makeText(MainActivity.this, "Welcome to Puma Planner!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Welcome to Puma Planner", Toast.LENGTH_SHORT).show();
                 } else {
-                    //Initializes the FirebaseUI, allowing for user to create a new account
+                    //Initiates account creation/login if the user is not logged in
+                    //TODO: Specify a custom theme to be used here, once we have a custom theme for the rest of the app
+                    //TODO: Re-enable smartlock when its time
                     onSignedOutCleanup();
                     startActivityForResult(
                             AuthUI.getInstance()
@@ -133,10 +128,27 @@ public class MainActivity extends AppCompatActivity
                             .setProviders(Arrays.asList(
                                     new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                            .build(), RC_SIGN_IN);
+                            .build(),
+                            RC_SIGN_IN);
                 }
             }
-        };*/
+        };
+    }
+
+    @Override
+    public void onResume() {
+        //Adds AuthStateListner whenever MainActivity is resumed
+        super.onResume();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListner);
+    }
+
+    @Override
+    public void onStop() {
+        //Removes AuthStateListener whenever MainActivity is stopped
+        super.onStop();
+        if (mAuthStateListner != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListner);
+        }
     }
 
     @Override
@@ -150,31 +162,90 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        //Get reference to pressed option
-        int id = item.getItemId();
+        //Checks which button has been pressed from the options menu and acts accordingly
+        switch (item.getItemId()) {
+            case R.id.settingBar:
+                //TODO: Insert code that will lead to a settings page
+                return true;
 
-        if (id==R.id.settingBar)
-        {
-            //insert code to get to a settings page which will eventually be added
-            return true;
+            case R.id.addAssignmentDropdown:
+                //Creates a new DialogAssignHomework and displays it
+                DialogAssignHomework newAssignment = new DialogAssignHomework();
+                newAssignment.show(getFragmentManager(), "");
+                return true;
+
+            case R.id.addArticleDropdown:
+                //Creates a new DialogAddArticle and displays it
+                DialogAddArticle newArticle = new DialogAddArticle();
+                newArticle.show(getFragmentManager(), null);
+                return true;
+
+            case R.id.signOut:
+                //Signs user out
+                AuthUI.getInstance().signOut(this);
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        if (id==R.id.addAssignmentDropdown)
-        {
-            //Creates a new DialogAssignHomework and displays it
-            DialogAssignHomework newAssignment = new DialogAssignHomework();
-            newAssignment.show(getFragmentManager(), "");
-            return true;
-        }
-
-        if (id==R.id.addArticleDropdown)
-        {
-            DialogAddArticle newArticle = new DialogAddArticle();
-            newArticle.show(getFragmentManager(), null);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
+                //Successful sign in
+                Toast.makeText(MainActivity.this, "Signed in!", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(MainActivity.this, "Sign in canceled", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
+
+    public void onSignedInInitialize(String username) {
+        //Sets username and attaches ChildEventListner
+        mUsername = username;
+        attachDatabaseReadListner();
+    }
+
+    public void onSignedOutCleanup() {
+        //Sets user back to anon, and removes displays and ChildEventListners
+        mUsername = ANONYMOUS;
+        mHomeworkAdapter.clear();
+        detachDatabaseReadListner();
+    }
+
+    public void attachDatabaseReadListner() {
+        //TODO: Make this attach all ChildEventListner's for other branches, or give ChildEventListener ability to differentiate between objects and act accordingly
+        if (mAssignmentChildEventListner == null) {
+            mAssignmentChildEventListner = new  ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    //TODO: (Maybe) Make this add all the other content that will be displayed on the main page, or create other ChildEventListener's to do this
+                    HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
+                    mHomeworkAdapter.add(homeworkAssignment);
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            };
+
+            mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
+        }
+    }
+
+    public void detachDatabaseReadListner() {
+        //TODO: Make this detach other ChildEventListner's if they get added, or disregard if they do not
+        if (mAssignmentChildEventListner != null) {
+            mAssignmentDatabaseReference.removeEventListener(mAssignmentChildEventListner);
+            mAssignmentChildEventListner = null;
+        }
+    }
 }
