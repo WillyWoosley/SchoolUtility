@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.appcompat.*;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.*;
-import com.firebase.ui.auth.BuildConfig;
-import com.google.android.gms.auth.api.Auth;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,6 +19,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.pacificcollegiate.dialogs.DialogAddArticle;
+import com.pacificcollegiate.dialogs.DialogAreLeader;
+import com.pacificcollegiate.dialogs.DialogAreTeacher;
+import com.pacificcollegiate.dialogs.DialogAssignHomework;
+import com.pacificcollegiate.dialogs.DialogShowHomework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,12 +35,8 @@ public class MainActivity extends AppCompatActivity
 
 
     //General to-do's
-    //TODO: URGENT: Make placeholder layouts for all the pages which will eventually be implemented
-    //TODO: URGENT: due-date textview and actual due-date often are placed over each other, something needs to be modified in the layout file
-    //TODO: URGENT: Go through the layouts and make some of the weird off grey text black
     //TODO: Get contact working, with placeholder contacts and ideally a working searchbar, assuming that google already has a pretty well made searchbar provided
     //TODO: Make the article assign dialog appear, and actually do something more than appear (save the information somewhere)
-    //TODO: Make all data persistent locally for now
     //TODO: Make events work. Not sure how this is going to look/work, not pressing for the demo
     //TODO: Make the contacts activity layout
     //TODO: Make the events activity layout
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     //TODO: Add ability to check off homework assignments from the list to set them as complete
     //TODO: Make the homework listview items images/background vary based upon assignment type/class
     //TODO: Fill in menubar placeholder assets with real images
+    //TODO: Make some sort of display that notifies a user of new things that is worth their seeing ("worth seeing" can be set in settings). This will need to use a Transaction
 
 
 
@@ -64,10 +64,11 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth.AuthStateListener mAuthStateListner;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
+    private DatabaseReference mUsersDatabaseReference;
     private ChildEventListener mAssignmentChildEventListner;
     ////////////////////
 
-    public void onFragmentInteraction(int position) {
+    public void onMenubarFragmentInteraction(int position) {
         //Empty method which can be filled with specific actions for the menu bar to take
         //Must be present for the menubar to work
     }
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mUsername = ANONYMOUS;
+        //May or may not need, alternative for user authentication with permissions
+        //mSharedPreferences = getSharedPreferences("MAIN_PREFS", 0);
 
         //Firebase references
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity
 
         //Firebase Database References
         mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
+        mUsersDatabaseReference = mFirebaseDatabase.getReference().child("users");
 
         //Sets up the HomeworkAssignment list, adapter, and ListView
         List<HomeworkAssignment> homeworkAssignments = new ArrayList<>();
@@ -114,7 +118,9 @@ public class MainActivity extends AppCompatActivity
 
                 //Sets up ChildEventListner so long as user is logged in
                 if (user != null) {
-                    onSignedInInitialize(user.getDisplayName());
+                    //Original
+                    //onSignedInInitialize(user.getDisplayName(), userUid);
+                    onSignedInInitialize(user);
                     Toast.makeText(MainActivity.this, "Welcome to Puma Planner", Toast.LENGTH_SHORT).show();
                 } else {
                     //Initiates account creation/login if the user is not logged in
@@ -137,7 +143,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onResume() {
-        //Adds AuthStateListner whenever MainActivity is resumed
+        //Adds AuthStateListener whenever MainActivity is resumed
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthStateListner);
     }
@@ -154,7 +160,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        //Inflate the admin menu
+        //Inflate the menu
+        //TODO: Make this so that it inflates different options from this menu for different users
         getMenuInflater().inflate(R.menu.menu_admin, menu);
         return true;
     }
@@ -196,7 +203,39 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
                 //Successful sign in
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Toast.makeText(MainActivity.this, "Signed in!", Toast.LENGTH_SHORT).show();
+                mUsername = user.getDisplayName();
+
+                final MenuItem addAssignment = (MenuItem) findViewById(R.id.addAssignmentDropdown);
+                MenuItem addEvent = (MenuItem) findViewById(R.id.addEventDropdown);
+
+                //Looks in the user portion of the database, and checks if there is already a user with thte Uid of the user currently using the service
+                mUsersDatabaseReference.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (!dataSnapshot.hasChild(user.getUid())) {
+                                    //TODO: Get all the necesary fields here, such as AUTH_STATUS, courses led or enrolled in, etc. (possibly do this through series of DialogFragments and AlertDialogs)
+                                    DatabaseReference userReference = mUsersDatabaseReference.child(user.getUid());
+                                    userReference.child("name").setValue(user.getDisplayName());
+                                    userReference.child("email").setValue(user.getEmail());
+
+                                    //Dialogs which will appear and handle user input/validation for leaders and teachers
+                                    DialogAreTeacher areTeacher = new DialogAreTeacher();
+                                    areTeacher.show(getFragmentManager(), "");
+                                    DialogAreLeader areLeader = new DialogAreLeader();
+                                    areLeader.show(getFragmentManager(), "");
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        }
+                );
+
+                DatabaseReference userTAuthReference = mUsersDatabaseReference.child(user.getUid()).child("isTeacher");
+                //TODO: Make this remove non-teachers views of the addAssignment button
+
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(MainActivity.this, "Sign in canceled", Toast.LENGTH_SHORT).show();
                 finish();
@@ -204,9 +243,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void onSignedInInitialize(String username) {
+    public void onSignedInInitialize(final FirebaseUser user) {
+
         //Sets username and attaches ChildEventListner
-        mUsername = username;
+        mUsername = user.getDisplayName();
         attachDatabaseReadListner();
     }
 
@@ -214,7 +254,7 @@ public class MainActivity extends AppCompatActivity
         //Sets user back to anon, and removes displays and ChildEventListners
         mUsername = ANONYMOUS;
         mHomeworkAdapter.clear();
-        detachDatabaseReadListner();
+        detachDatabaseReadListners();
     }
 
     public void attachDatabaseReadListner() {
@@ -241,7 +281,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void detachDatabaseReadListner() {
+    public void detachDatabaseReadListners() {
         //TODO: Make this detach other ChildEventListner's if they get added, or disregard if they do not
         if (mAssignmentChildEventListner != null) {
             mAssignmentDatabaseReference.removeEventListener(mAssignmentChildEventListner);

@@ -14,7 +14,7 @@ public class EventsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(int position)
+    public void onMenubarFragmentInteraction(int position)
     {
         //placeholder interaction listener which must be implemented
         //and can be filled with specific actions to be taken when clicked

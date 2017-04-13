@@ -3,17 +3,15 @@ package com.gamecodeschool.schoolutility;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.QuickContactBadge;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.pacificcollegiate.dialogs.DialogContact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,7 @@ public class ContactsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(int position)
+    public void onMenubarFragmentInteraction(int position)
     {
         //placeholder interaction listener which must be implemented
         //and can be filled with specific actions to be taken when clicked

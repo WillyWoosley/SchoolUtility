@@ -1,4 +1,4 @@
-package com.gamecodeschool.schoolutility;
+package com.pacificcollegiate.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.gamecodeschool.schoolutility.HomeworkAssignment;
+import com.gamecodeschool.schoolutility.R;
 
 import org.w3c.dom.Text;
 

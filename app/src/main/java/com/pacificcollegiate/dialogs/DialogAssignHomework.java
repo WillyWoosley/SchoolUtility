@@ -1,4 +1,4 @@
-package com.gamecodeschool.schoolutility;
+package com.pacificcollegiate.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.gamecodeschool.schoolutility.HomeworkAssignment;
+import com.gamecodeschool.schoolutility.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

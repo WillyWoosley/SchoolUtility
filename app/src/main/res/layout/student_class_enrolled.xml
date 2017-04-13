@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Please input your schedule (You can modify this list later):"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/firstPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/textView4"
+        android:layout_marginTop="15dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/firstPeriodText"/>
+
+    <TextView
+        android:id="@+id/secondPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Second Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/spinnerPeriodOne"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/secondPeriodText"/>
+
+    <TextView
+        android:id="@+id/thirdPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Third Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/spinnerPeriodTwo"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/thirdPeriodText"/>
+
+    <TextView
+        android:id="@+id/fourthPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fourth Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/spinnerPeriodThree"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/fourthPeriodText"/>
+
+    <TextView
+        android:id="@+id/fifthPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fifth Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/spinnerPeriodFour"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodFive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/fifthPeriodText"/>
+
+    <TextView
+        android:id="@+id/sixthPeriodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sixth Period"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/spinnerPeriodFive"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPeriodSix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/sixthPeriodText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't see your class listed? Your teacher has probably not registered with Puma Planner yet. Just leave the class blank for not and check back later."
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/spinnerPeriodSix"/>
+
+</RelativeLayout>

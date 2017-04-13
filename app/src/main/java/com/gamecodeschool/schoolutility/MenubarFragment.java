@@ -22,7 +22,7 @@ public class MenubarFragment extends Fragment {
 
     public interface OnFragmentInteractionListener
     {
-        public void onFragmentInteraction(int position);
+        public void onMenubarFragmentInteraction(int position);
     }
 
     @Override
