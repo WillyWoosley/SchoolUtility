@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
     private DatabaseReference mUsersDatabaseReference;
+    private DatabaseReference mContactDatabaseReference;
     private ChildEventListener mAssignmentChildEventListner;
     ////////////////////
 
@@ -142,9 +143,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResume() {
-        //Adds AuthStateListener whenever MainActivity is resumed
-        super.onResume();
+    public void onStart() {
+        //Adds AuthStateListener whenever MainActivity is started
+        //Maybe onResume/onPause?
+        super.onStart();
         mFirebaseAuth.addAuthStateListener(mAuthStateListner);
     }
 
@@ -226,6 +228,8 @@ public class MainActivity extends AppCompatActivity
                                     areTeacher.show(getFragmentManager(), "");
                                     DialogAreLeader areLeader = new DialogAreLeader();
                                     areLeader.show(getFragmentManager(), "");
+
+                                    //TODO: Create a storage repository of images, and randomly select one to be set as a users badge profile, except for maybe not teachers
                                 }
                             }
                             @Override
@@ -233,7 +237,6 @@ public class MainActivity extends AppCompatActivity
                         }
                 );
 
-                DatabaseReference userTAuthReference = mUsersDatabaseReference.child(user.getUid()).child("isTeacher");
                 //TODO: Make this remove non-teachers views of the addAssignment button
 
             } else if (resultCode == RESULT_CANCELED) {

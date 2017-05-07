@@ -1,16 +1,24 @@
 package com.gamecodeschool.schoolutility;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pacificcollegiate.dialogs.DialogContact;
 
 import java.util.ArrayList;
@@ -18,25 +26,37 @@ import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity
         implements MenubarFragment.OnFragmentInteractionListener {
+
+    //Member variables//
+    private ChildEventListener mUserChildEventListner;
+    private ContactAdapter mContactAdapter;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mUsersDatabaseReference;
+    ////////////////////
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
-       //Placeholder code for demo
-       LinearLayout scrollLayout = (LinearLayout) findViewById(R.id.placeholderContactScroll);
+       mFirebaseDatabase = FirebaseDatabase.getInstance();
+       mUsersDatabaseReference = mFirebaseDatabase.getReference().child("users");
 
-       scrollLayout.setOnClickListener(
-               new View.OnClickListener()
-               {
+       List<Contact> contacts = new ArrayList<>();
+       mContactAdapter = new ContactAdapter(this, R.layout.contact_listview, contacts);
+       ListView listContacts = (ListView) findViewById(R.id.contact_listview_display);
+       listContacts.setAdapter(mContactAdapter);
+
+       /*listContacts.setOnClickListener(
+               new AdapterView.OnItemClickListener() {
                    @Override
-                   public void onClick(View v)
-                   {
-                        DialogContact viewContact = new DialogContact();
-                        viewContact.show(getFragmentManager(), "");
+                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                       Contact tempContact = mContactAdapter.getItem(position);
+                       DialogContact dialogContact = new DialogContact();
+
                    }
                }
-       );
+       );*/
     }
 
     @Override
@@ -46,58 +66,44 @@ public class ContactsActivity extends AppCompatActivity
         //and can be filled with specific actions to be taken when clicked
     }
 
-    //Implements ListView for contacts listview
-    public class ContactsAdapter extends BaseAdapter
-    {
-        List<Contact> contactList = new ArrayList<Contact>();
+    @Override
+    public void onResume() {
+        super.onResume();
+        attachDatabaseReadListener();
+    }
 
-        @Override
-        public int getCount()
-        {
-            return contactList.size();
+    @Override
+    public void onPause() {
+        super.onPause();
+        detachDatabaseReadListners();
+    }
+
+    public void attachDatabaseReadListener() {
+        if (mUserChildEventListner == null) {
+            mUserChildEventListner = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Contact contact = dataSnapshot.getValue(Contact.class);
+                    mContactAdapter.add(contact);
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            };
+
+            mUsersDatabaseReference.addChildEventListener(mUserChildEventListner);
         }
+    }
 
-        @Override
-        public long getItemId(int whichItem)
-        {
-            return whichItem;
-        }
-
-        @Override
-        public Contact getItem(int whichItem)
-        {
-            return contactList.get(whichItem);
-        }
-
-        //Implements the ListView
-        @Override
-        public View getView(int whichItem, View view, ViewGroup viewGroup)
-        {
-            //Inflates if it hasn't already been done
-            if (view == null) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.contact_listview, viewGroup, false);
-            }
-
-            //Create a reference to the assignment in question
-            Contact tempContact = contactList.get(whichItem);
-
-            TextView contactName = (TextView) view.findViewById(R.id.contactName);
-            TextView contactInformation = (TextView) view.findViewById(R.id.contactInformation);
-            QuickContactBadge contactBadge = (QuickContactBadge) view.findViewById(R.id.contactBadge);
-
-            contactName.setText(tempContact.getmName());
-            contactInformation.setText(tempContact.getmInformation());
-            //TODO: Implement something which chanegs contact badges. This will also probably have to be tied in with account creeation
-
-            return view;
-        }
-
-        //Method currently never called, but will be needed to add contacts to the list
-        public void addContact(Contact c)
-        {
-            contactList.add(c);
-            notifyDataSetChanged();
+    public void detachDatabaseReadListners() {
+        if (mUsersDatabaseReference != null) {
+            mUsersDatabaseReference.removeEventListener(mUserChildEventListner);
+            mUserChildEventListner = null;
         }
     }
 }

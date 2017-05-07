@@ -31,8 +31,6 @@ public class HomeworkAssignment {
         this.dueDate = dueDate;
     }
 
-
-
     public String getAssignmentDescription() {
         return assignmentDescription;
     }

@@ -2,6 +2,9 @@ package com.gamecodeschool.schoolutility;
 
 import android.widget.QuickContactBadge;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by wdwoo on 3/29/2017.
  */
@@ -15,46 +18,58 @@ public class Contact {
     String mInformation;
     String mNumber;
     String mEmail;
+    boolean mIsTeacher;
+    boolean mIsLeader;
     QuickContactBadge mContactBadge;
     ////////////////////
 
-    public String getmName() {
+    public Contact() {
+    }
+
+    public Contact(String username, boolean isTeacher, boolean isLeader, String email) {
+        mName = username;
+        mIsLeader = isLeader;
+        mIsTeacher = isTeacher;
+        mEmail = email;
+    }
+
+    public String getName() {
         return mName;
     }
 
-    public void setmName(String mName) {
+    public void setName(String mName) {
         this.mName = mName;
     }
 
-    public String getmInformation() {
+    public String getInformation() {
         return mInformation;
     }
 
-    public void setmInformation(String mInformation) {
+    public void setInformation(String mInformation) {
         this.mInformation = mInformation;
     }
 
-    public String getmNumber() {
+    public String getNumber() {
         return mNumber;
     }
 
-    public void setmNumber(String mNumber) {
+    public void setNumber(String mNumber) {
         this.mNumber = mNumber;
     }
 
-    public String getmEmail() {
+    public String getEmail() {
         return mEmail;
     }
 
-    public void setmEmail(String mEmail) {
+    public void setEmail(String mEmail) {
         this.mEmail = mEmail;
     }
 
-    public QuickContactBadge getmContactBadge() {
+    public QuickContactBadge getContactBadge() {
         return mContactBadge;
     }
 
-    public void setmContactBadge(QuickContactBadge mContactBadge) {
+    public void setContactBadge(QuickContactBadge mContactBadge) {
         this.mContactBadge = mContactBadge;
     }
 }
