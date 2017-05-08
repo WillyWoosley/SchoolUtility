@@ -47,16 +47,17 @@ public class ContactsActivity extends AppCompatActivity
        ListView listContacts = (ListView) findViewById(R.id.contact_listview_display);
        listContacts.setAdapter(mContactAdapter);
 
-       /*listContacts.setOnClickListener(
+       listContacts.setOnItemClickListener(
                new AdapterView.OnItemClickListener() {
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                        Contact tempContact = mContactAdapter.getItem(position);
-                       DialogContact dialogContact = new DialogContact();
-
+                       DialogContact showContact = new DialogContact();
+                       showContact.sendContact(tempContact);
+                       showContact.show(getFragmentManager(), "");
                    }
                }
-       );*/
+       );
     }
 
     @Override

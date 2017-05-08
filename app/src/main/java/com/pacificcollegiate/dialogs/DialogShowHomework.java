@@ -20,7 +20,9 @@ import org.w3c.dom.Text;
 
 public class DialogShowHomework extends DialogFragment {
 
+    //Member Variables//
     private HomeworkAssignment mHomework;
+    ////////////////////
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
