@@ -43,4 +43,7 @@
         completions."
     </string>
 
+    //string for search hint
+    <string name="search_hint">Search Contacts</string>
+
 </resources>
