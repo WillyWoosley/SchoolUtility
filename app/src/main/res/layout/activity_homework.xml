@@ -2,65 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.gamecodeschool.schoolutility.HomeworkActivity">
+    android:layout_height="match_parent">
 
-    <fragment
-        android:name="com.gamecodeschool.schoolutility.MenubarFragment"
-        android:id="@+id/homeworkMenubar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        tools:layout="@layout/menubar_fragment" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/homeworkAddAssignmentLayout"
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
-
-                <ImageView
-                    android:id="@+id/addAssignmentImageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:srcCompat="@android:drawable/ic_input_add"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Assignment"
-                    android:textSize="20sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/addAssignmentImageView"
-                    />
-
-
-            </RelativeLayout>
-
-            <ListView
-                android:id="@+id/homework_listview_display"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                tools:listitem="@layout/homework_listview"/>
-        </LinearLayout>
-
-
-
-    </ScrollView>
 
     <ImageView
         android:id="@+id/imageView"
@@ -68,5 +13,54 @@
         android:layout_height="match_parent"
         android:alpha=".05"
         app:srcCompat="@drawable/pcs_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/homeworkAddAssignmentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+            <ImageView
+                android:id="@+id/addAssignmentImageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addAssignmentImageView"
+                android:layout_centerHorizontal="true"
+                android:text="Add Assignment"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/homework_listview_display"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="9"
+            tools:listitem="@layout/homework_listview" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/homeworkMenubar"
+        android:name="com.gamecodeschool.schoolutility.MenubarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        tools:layout="@layout/menubar_fragment" />
 
 </RelativeLayout>

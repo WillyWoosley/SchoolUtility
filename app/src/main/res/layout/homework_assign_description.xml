@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <!--TODO: Make text wrap-->
 
     <EditText
         android:layout_width="wrap_content"
@@ -13,8 +16,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/assign_homework_title"
         android:textSize="24sp"
-        android:textStyle="normal|bold"
-        android:singleLine="true" />
+        android:textStyle="normal|bold"/>
 
     <EditText
         android:layout_width="match_parent"
