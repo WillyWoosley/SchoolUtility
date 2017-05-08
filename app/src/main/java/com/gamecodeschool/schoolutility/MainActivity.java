@@ -24,6 +24,7 @@ import com.pacificcollegiate.dialogs.DialogAddArticle;
 import com.pacificcollegiate.dialogs.DialogAreLeader;
 import com.pacificcollegiate.dialogs.DialogAreTeacher;
 import com.pacificcollegiate.dialogs.DialogAssignHomework;
+import com.pacificcollegiate.dialogs.DialogCreateClass;
 import com.pacificcollegiate.dialogs.DialogShowHomework;
 
 import java.util.ArrayList;
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
+
+        DialogCreateClass createClass = new DialogCreateClass();
+        createClass.show(getFragmentManager(), "");
     }
 
     @Override

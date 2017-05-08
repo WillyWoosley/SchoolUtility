@@ -24,11 +24,12 @@ public class DialogAssignHomework extends DialogFragment {
     private DatabaseReference mHomeworkDatabaseReference;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.homework_assign_description, null);
+        builder.setView(dialogView).setMessage("New Assignment:");
 
         //Initializes database and reference to assignments branch
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -43,7 +44,7 @@ public class DialogAssignHomework extends DialogFragment {
         Button btnCancel = (Button) dialogView.findViewById(R.id.assign_description_cancel);
         Button btnContinue = (Button) dialogView.findViewById(R.id.assign_description_continue);
 
-        builder.setView(dialogView).setMessage("New Assignment:");
+
 
 
         btnCancel.setOnClickListener(

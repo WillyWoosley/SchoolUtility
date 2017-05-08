@@ -21,7 +21,8 @@
         <activity android:name=".NewsActivity" />
         <activity android:name=".EventsActivity" />
         <activity android:name=".ContactsActivity" />
-        <activity android:name=".CollectionAnnouncementActivity"></activity>
+        <activity android:name=".CollectionAnnouncementActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
