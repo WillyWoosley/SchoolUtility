@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity
     private HomeworkAdapter mHomeworkAdapter;
     private String mUsername;
 
+    private boolean placeholder;
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListner;
     private FirebaseDatabase mFirebaseDatabase;
@@ -141,9 +143,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-
-        DialogCreateClass createClass = new DialogCreateClass();
-        createClass.show(getFragmentManager(), "");
     }
 
     @Override
@@ -251,7 +250,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onSignedInInitialize(final FirebaseUser user) {
-
         //Sets username and attaches ChildEventListner
         mUsername = user.getDisplayName();
         attachDatabaseReadListner();

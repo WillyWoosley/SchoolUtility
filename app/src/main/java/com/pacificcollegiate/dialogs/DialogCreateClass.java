@@ -11,11 +11,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.gamecodeschool.schoolutility.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wdwoo on 5/7/2017.
@@ -48,6 +47,10 @@ public class DialogCreateClass extends DialogFragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mClassesDatabaseReference = mFirebaseDatabase.getReference().child("classes");
 
+        //TODO: There may be a cleaner way to do this, look into making it so all the classes don't have to have these unique key identifiers
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        final DatabaseReference mUserDatabaseReference = mFirebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("classesTaught").push();
+
         mFirstPeriodDatabaseReference = mClassesDatabaseReference.child("first");
         mSecondPeriodDatabaseReference = mClassesDatabaseReference.child("second");
         mThirdPeriodDatabaseReference = mClassesDatabaseReference.child("third");
@@ -57,8 +60,6 @@ public class DialogCreateClass extends DialogFragment {
         final DatabaseReference[] periodDatabaseReferences = {mFirstPeriodDatabaseReference, mSecondPeriodDatabaseReference,
             mThirdPeriodDatabaseReference, mFourthPeriodDatabaseReference, mFifthPeriodDatabaseReference, mSixthPeriodDatabaseReference};
 
-        //Booleans assigned to true of checkbox checked
-        //TODO: List, append for every true checkbox, then for entry in list add to database
         CheckBox first = (CheckBox) dialogView.findViewById(R.id.firstPeriod);
         CheckBox second = (CheckBox) dialogView.findViewById(R.id.secondPeriod);
         CheckBox third = (CheckBox) dialogView.findViewById(R.id.thirdPeriod);
@@ -73,9 +74,14 @@ public class DialogCreateClass extends DialogFragment {
                     public void onClick(View view) {
                         for (int i = 0; i<periods.length; i++) {
                             if (periods[i].isChecked()) {
-                                periodDatabaseReferences[i].push().setValue(className.getText());
+                                String classname = className.getText().toString();
+                                periodDatabaseReferences[i].child(classname).setValue(true);
+                                mUserDatabaseReference.child(classname).setValue(true);
                             }
                         }
+
+                        DialogAnotherClass anotherClass = new DialogAnotherClass();
+                        anotherClass.show(getFragmentManager(), "");
                         dismiss();
                     }
                 }
