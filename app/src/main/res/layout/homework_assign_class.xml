@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_margin="10dp">
 
     <TextView
         android:text="@string/select_class"
@@ -10,35 +11,58 @@
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="23sp" />
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp" >
+        android:layout_marginTop="12dp" >
 
         <RadioButton
-            android:text="@string/pre_calc"
+            android:id="@+id/classAssignFirst"
+            android:text="first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radioButton9"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="@string/calculus"
+            android:id="@+id/classAssignSecond"
+            android:text="second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radioButton8"
             android:layout_weight="1" />
 
         <RadioButton
-            android:id="@+id/radioButton7"
+            android:id="@+id/classAssignThird"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/multi" />
+            android:text="third" />
+
+        <RadioButton
+            android:id="@+id/classAssignFourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="fourth" />
+
+        <RadioButton
+            android:id="@+id/classAssignFifth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="fifth" />
+
+        <RadioButton
+            android:id="@+id/classAssignSixth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="sixth" />
 
     </RadioGroup>
 
