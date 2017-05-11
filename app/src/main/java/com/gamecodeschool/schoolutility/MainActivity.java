@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.pacificcollegiate.dialogs.DialogAddArticle;
 import com.pacificcollegiate.dialogs.DialogAreLeader;
 import com.pacificcollegiate.dialogs.DialogAreTeacher;
+import com.pacificcollegiate.dialogs.DialogAssignClass;
 import com.pacificcollegiate.dialogs.DialogAssignHomework;
 import com.pacificcollegiate.dialogs.DialogCreateClass;
 import com.pacificcollegiate.dialogs.DialogShowHomework;
@@ -184,12 +185,8 @@ public class MainActivity extends AppCompatActivity
                 //Creates a new DialogAssignHomework and displays it
                 DialogAssignHomework newAssignment = new DialogAssignHomework();
                 newAssignment.show(getFragmentManager(), "");
-                return true;
-
-            case R.id.addArticleDropdown:
-                //Creates a new DialogAddArticle and displays it
-                DialogAddArticle newArticle = new DialogAddArticle();
-                newArticle.show(getFragmentManager(), null);
+                DialogAssignClass assignClass = new DialogAssignClass();
+                assignClass.show(getFragmentManager(), "");
                 return true;
 
             case R.id.signOut:

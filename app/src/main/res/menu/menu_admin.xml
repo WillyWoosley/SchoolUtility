@@ -15,12 +15,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/addArticleDropdown"
-        android:title="Add News Story"
-        android:orderInCategory="3"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/addEventDropdown"
         android:title="Add Event"
         android:orderInCategory="4"

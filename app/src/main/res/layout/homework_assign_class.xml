@@ -15,63 +15,67 @@
         android:textColor="@android:color/black"
         android:textSize="22sp" />
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" >
-
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignFirst"
+            android:layout_below="@id/textView2"
+            android:layout_centerHorizontal="true"
             android:text="first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignSecond"
             android:text="second"
+            android:layout_below="@id/classAssignFirst"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignThird"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/classAssignSecond"
+            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:text="third" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignFourth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/classAssignThird"
+            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:text="fourth" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignFifth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/classAssignFourth"
+            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:text="fifth" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/classAssignSixth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/classAssignFifth"
+            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:text="sixth" />
 
-    </RadioGroup>
 
 
     <Button
         android:text="@string/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button10"
+        android:id="@+id/assignClassOk"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"/>

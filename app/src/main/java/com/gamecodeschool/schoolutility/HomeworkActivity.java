@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pacificcollegiate.dialogs.DialogAssignClass;
 import com.pacificcollegiate.dialogs.DialogAssignHomework;
 import com.pacificcollegiate.dialogs.DialogShowHomework;
 
@@ -51,7 +52,6 @@ public class HomeworkActivity extends AppCompatActivity
         ListView listAssignment = (ListView) findViewById(R.id.homework_listview_display);
         listAssignment.setAdapter(mHomeworkAdapter);
 
-
         listAssignment.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -74,6 +74,8 @@ public class HomeworkActivity extends AppCompatActivity
                     public void onClick(View v) {
                         DialogAssignHomework newAssignment = new DialogAssignHomework();
                         newAssignment.show(getFragmentManager(), "");
+                        DialogAssignClass assignClass = new DialogAssignClass();
+                        assignClass.show(getFragmentManager(), "");
                     }
                 }
         );
@@ -92,12 +94,10 @@ public class HomeworkActivity extends AppCompatActivity
     }
 
     public void attachDatabaseReadListner() {
-        //TODO: Make this attach all ChildEventListner's for other branches, or give ChildEventListener ability to differentiate between objects and act accordingly
         if (mAssignmentChildEventListner == null) {
             mAssignmentChildEventListner = new  ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    //TODO: (Maybe) Make this add all the other content that will be displayed on the main page, or create other ChildEventListener's to do this
                     HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
                     mHomeworkAdapter.add(homeworkAssignment);
                 }
