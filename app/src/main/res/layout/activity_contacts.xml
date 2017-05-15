@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gamecodeschool.schoolutility.ContactsActivity">
+    tools:context="com.gamecodeschool.schoolutility.ContactsActivity"
+    >
 
     <fragment
         android:name="com.gamecodeschool.schoolutility.MenubarFragment"
         android:id="@+id/contactsMenubar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         tools:layout="@layout/menubar_fragment" />
 

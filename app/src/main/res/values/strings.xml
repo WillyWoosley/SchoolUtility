@@ -46,4 +46,10 @@
     //string for search hint
     <string name="search_hint">Search Contacts</string>
 
+    //strings to identify each page
+    <string name="contacts">Contacts</string>
+    <string name="calendar">Calendar</string>
+    <string name="the_roar">The Roar</string>
+    <string name="homework">Homework</string>
+
 </resources>

@@ -10,7 +10,7 @@
         android:name="com.gamecodeschool.schoolutility.MenubarFragment"
         android:id="@+id/eventsMenubar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         tools:layout="@layout/menubar_fragment" />
 

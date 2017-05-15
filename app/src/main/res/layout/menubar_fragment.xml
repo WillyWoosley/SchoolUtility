@@ -10,39 +10,39 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/alert_dark_frame" />
-
-    <ImageButton
-        android:id="@+id/mainPage"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:background="@color/colorMenuBar"
+        app:srcCompat="@drawable/news_icon" />
 
     <ImageButton
         android:id="@+id/mainContacts"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:background="@color/colorMenuBar"
+        app:srcCompat="@drawable/contact_icon" />
+
+    <ImageButton
+        android:id="@+id/mainPage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorMenuBar"
+        app:srcCompat="@drawable/main_icon" />
 
     <ImageButton
         android:id="@+id/mainHomework"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        android:background="@color/colorMenuBar"
+        app:srcCompat="@drawable/homework_icon" />
 
     <ImageButton
         android:id="@+id/mainEvents"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        android:background="@color/colorMenuBar"
+        app:srcCompat="@drawable/calendar_icon" />
 
 </LinearLayout>
