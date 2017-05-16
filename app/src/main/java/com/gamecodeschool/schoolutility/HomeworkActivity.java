@@ -72,8 +72,6 @@ public class HomeworkActivity extends AppCompatActivity
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DialogAssignHomework newAssignment = new DialogAssignHomework();
-                        newAssignment.show(getFragmentManager(), "");
                         DialogAssignClass assignClass = new DialogAssignClass();
                         assignClass.show(getFragmentManager(), "");
                     }

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 public class HomeworkAssignment {
 
     //Member Variables//
+    private String className;
     private String assignmentName;
     private String assignmentDescription;
     private String assignmentType;
@@ -25,7 +26,8 @@ public class HomeworkAssignment {
         //empty constructor, necesary to have one which can have a JSON object fed
     }
 
-    public HomeworkAssignment(String assignmentName, String assignmentDescription, String dueDate) {
+    public HomeworkAssignment(String assignmentName, String assignmentDescription, String dueDate, String className) {
+        this.className = className;
         this.assignmentName = assignmentName;
         this.assignmentDescription = assignmentDescription;
         this.dueDate = dueDate;

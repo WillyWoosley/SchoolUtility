@@ -183,8 +183,6 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.addAssignmentDropdown:
                 //Creates a new DialogAssignHomework and displays it
-                DialogAssignHomework newAssignment = new DialogAssignHomework();
-                newAssignment.show(getFragmentManager(), "");
                 DialogAssignClass assignClass = new DialogAssignClass();
                 assignClass.show(getFragmentManager(), "");
                 return true;
@@ -281,6 +279,7 @@ public class MainActivity extends AppCompatActivity
 
             mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
         }
+        
     }
 
     public void detachDatabaseReadListners() {

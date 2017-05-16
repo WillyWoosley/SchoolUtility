@@ -34,6 +34,7 @@ public class DialogAssignClass extends DialogFragment {
 
     private DatabaseReference mUsersClassesReference;
     private List<SchoolClass> classes = new ArrayList<SchoolClass>();
+    String mClassName;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -43,16 +44,6 @@ public class DialogAssignClass extends DialogFragment {
         View dialogView = inflater.inflate(R.layout.homework_assign_class, null);
         builder.setView(dialogView).setMessage("New Assignment:");
 
-        Button btnOk = (Button) dialogView.findViewById(R.id.assignClassOk);
-        btnOk.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dismiss();
-                    }
-                }
-        );
-
         final CheckBox first = (CheckBox) dialogView.findViewById(R.id.classAssignFirst);
         final CheckBox second = (CheckBox) dialogView.findViewById(R.id.classAssignSecond);
         final CheckBox third = (CheckBox) dialogView.findViewById(R.id.classAssignThird);
@@ -60,6 +51,7 @@ public class DialogAssignClass extends DialogFragment {
         final CheckBox fifth = (CheckBox) dialogView.findViewById(R.id.classAssignFifth);
         final CheckBox sixth = (CheckBox) dialogView.findViewById(R.id.classAssignSixth);
         CheckBox[] temp = {first, second, third, fourth, fifth, sixth};
+        //TODO: Switch these to radio buttons, its janky, but it really can only be for one class
         final List<CheckBox> checkBoxes = new ArrayList<CheckBox>();
         for(CheckBox c : temp) {
             checkBoxes.add(c);
@@ -69,13 +61,36 @@ public class DialogAssignClass extends DialogFragment {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userClassRef = mRef.getReference().child("users").child(currentUser.getUid()).child("classesTaught");
 
+        Button btnOk = (Button) dialogView.findViewById(R.id.assignClassOk);
+        btnOk.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //This does communicate information to the other dialog, it just doesn't work because there are still issues with classLed retrieval
+                        for (CheckBox c: checkBoxes) {
+                            if (c.isChecked()) {
+                                mClassName = c.getText().toString();
+                                break;
+                            }
+                        }
+
+                        DialogFragment assignFragment = DialogAssignHomework.newInstance(mClassName);
+                        assignFragment.show(getFragmentManager(),"");
+                        dismiss();
+                    }
+                }
+        );
+
         userClassRef.addChildEventListener(
                 new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        //TODO: Move this to activities where dialog is created, pass classes as bundle of args
                         SchoolClass schoolClass = dataSnapshot.getValue(SchoolClass.class);
-                        checkBoxes.get(0).setText(schoolClass.getClassName());
-                        checkBoxes.remove(0);
+                        classes.add(schoolClass);
+                        //checkBoxes.get(0).setText(schoolClass.getClassName());
+                        //TODO: This doesn't work because it merely removes the reference from the array, but does not remove it from the view
+                        //checkBoxes.remove(0);
                     }
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
