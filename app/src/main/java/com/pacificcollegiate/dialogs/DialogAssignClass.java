@@ -34,7 +34,24 @@ public class DialogAssignClass extends DialogFragment {
 
     private DatabaseReference mUsersClassesReference;
     private List<SchoolClass> classes = new ArrayList<SchoolClass>();
+    private String[] mClassesLed;
     String mClassName;
+
+    static DialogAssignClass newInstance(String[] classesLed) {
+        DialogAssignClass assignClass = new DialogAssignClass();
+
+        Bundle args = new Bundle();
+        args.putStringArray("classesLed", classesLed);
+        assignClass.setArguments(args);
+
+        return assignClass;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mClassesLed = getArguments().getStringArray("classesLed");
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -58,8 +75,6 @@ public class DialogAssignClass extends DialogFragment {
         }
 
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference userClassRef = mRef.getReference().child("users").child(currentUser.getUid()).child("classesTaught");
 
         Button btnOk = (Button) dialogView.findViewById(R.id.assignClassOk);
         btnOk.setOnClickListener(
@@ -81,7 +96,7 @@ public class DialogAssignClass extends DialogFragment {
                 }
         );
 
-        userClassRef.addChildEventListener(
+        /*userClassRef.addChildEventListener(
                 new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -101,7 +116,7 @@ public class DialogAssignClass extends DialogFragment {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {}
                 }
-        );
+        );*/
 
         return builder.create();
     }

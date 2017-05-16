@@ -9,13 +9,12 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by wdwoo on 3/29/2017.
  */
 
-//For now largely a placeholder class with getter and setter methods for crucial information which will someday be
-//Held and recieved by contact objects
 public class Contact {
 
     //Member Variables//
     String mName;
     String mInformation;
+
     String mNumber;
     String mEmail;
     boolean mIsTeacher;
@@ -31,6 +30,22 @@ public class Contact {
         mIsLeader = isLeader;
         mIsTeacher = isTeacher;
         mEmail = email;
+    }
+
+    public boolean isIsTeacher() {
+        return mIsTeacher;
+    }
+
+    public void setIsTeacher(boolean mIsTeacher) {
+        this.mIsTeacher = mIsTeacher;
+    }
+
+    public boolean isIsLeader() {
+        return mIsLeader;
+    }
+
+    public void setIsLeader(boolean mIsLeader) {
+        this.mIsLeader = mIsLeader;
     }
 
     public String getName() {

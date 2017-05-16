@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,10 +28,13 @@ public class HomeworkActivity extends AppCompatActivity
 
     //Member Variables//
     private HomeworkAdapter mHomeworkAdapter;
+    private List<String> classesLed = new ArrayList<String>();
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
+    private DatabaseReference userClassRef;
     private ChildEventListener mAssignmentChildEventListner;
+    private ChildEventListener mClassLedEventListner;
     ////////////////////
 
     public void onMenubarFragmentInteraction(int position) {
@@ -45,6 +51,8 @@ public class HomeworkActivity extends AppCompatActivity
 
         //Firebase Database References
         mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        userClassRef = mFirebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("classesTaught");
 
         //Sets up the HomeworkAssignment list, adapter, and ListView
         List<HomeworkAssignment> homeworkAssignments = new ArrayList<>();
@@ -62,6 +70,10 @@ public class HomeworkActivity extends AppCompatActivity
                         DialogShowHomework showHomework = new DialogShowHomework();
                         showHomework.sendHomework(tempAssignment);
                         showHomework.show(getFragmentManager(), "");
+
+                        for (String s : classesLed) {
+                            Toast.makeText(HomeworkActivity.this, s, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
         );
@@ -111,6 +123,25 @@ public class HomeworkActivity extends AppCompatActivity
 
             mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
         }
+
+        if (mClassLedEventListner == null) {
+            mClassLedEventListner = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    SchoolClass schoolClass = dataSnapshot.getValue(SchoolClass.class);
+                    classesLed.add(schoolClass.getClassName());
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            };
+            userClassRef.addChildEventListener(mClassLedEventListner);
+        }
     }
 
     public void detachDatabaseReadListners() {
@@ -118,6 +149,11 @@ public class HomeworkActivity extends AppCompatActivity
         if (mAssignmentChildEventListner != null) {
             mAssignmentDatabaseReference.removeEventListener(mAssignmentChildEventListner);
             mAssignmentChildEventListner = null;
+        }
+
+        if (mClassLedEventListner != null)  {
+            userClassRef.removeEventListener(mClassLedEventListner);
+            mClassLedEventListner = null;
         }
     }
 }

@@ -35,8 +35,15 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         Contact tempContact = getItem(whichItem);
 
         TextView contactName = (TextView) view.findViewById(R.id.contactName);
+        TextView isTeacher = (TextView) view.findViewById(R.id.studentOrTeacher);
         contactName.setText(tempContact.getName());
         //TODO: Implement something which changes contact badges. This will also probably have to be tied in with account creeation
+        //TODO: You are here, it doesn't get the boolean, no getter method
+        if (tempContact.isIsTeacher()) {
+            isTeacher.setText("Teacher");
+        } else {
+            isTeacher.setText(tempContact.getName());
+        }
 
         return view;
     }

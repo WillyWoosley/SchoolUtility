@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,21 +49,21 @@ public class ContactsActivity extends AppCompatActivity
        ListView listContacts = (ListView) findViewById(R.id.contact_listview_display);
        listContacts.setAdapter(mContactAdapter);
 
-       /*listContacts.setOnClickListener(
+       listContacts.setOnItemClickListener(
                new AdapterView.OnItemClickListener() {
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                        Contact tempContact = mContactAdapter.getItem(position);
-                       DialogContact dialogContact = new DialogContact();
-
+                       DialogContact showContact = new DialogContact();
+                       showContact.sendContact(tempContact);
+                       showContact.show(getFragmentManager(), "");
                    }
                }
-       );*/
+       );
     }
 
     @Override
-    public void onMenubarFragmentInteraction(int position)
-    {
+    public void onMenubarFragmentInteraction(int position) {
         //placeholder interaction listener which must be implemented
         //and can be filled with specific actions to be taken when clicked
     }
