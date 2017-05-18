@@ -18,12 +18,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeworkActivity"
-            android:screenOrientation="portrait"/>
+            android:label="@string/homework"
+            android:screenOrientation="portrait" />
         <activity android:name=".NewsActivity"
+            android:label="@string/the_roar"
             android:screenOrientation="portrait"/>
         <activity android:name=".EventsActivity"
+            android:label="@string/calendar"
             android:screenOrientation="portrait"/>
         <activity android:name=".ContactsActivity"
+            android:label="@string/contacts"
             android:screenOrientation="portrait"/>
         <activity android:name=".CollectionAnnouncementActivity"></activity>
 
