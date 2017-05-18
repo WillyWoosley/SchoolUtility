@@ -12,9 +12,18 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/studentOrTeacher"
+        android:id="@+id/isTeacher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teacher/Student"
+        android:text="Teacher"
         android:layout_below="@+id/contactName" />
+
+    <TextView
+        android:id="@+id/isLeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leader"
+        android:layout_toRightOf="@id/isTeacher"
+        android:layout_alignTop="@id/isTeacher"
+        android:layout_marginLeft="5dp"/>
 </RelativeLayout>

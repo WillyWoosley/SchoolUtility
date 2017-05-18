@@ -23,6 +23,7 @@ public class HomeworkAssignment {
     ////////////////////
 
     public HomeworkAssignment() {
+
         //empty constructor, necesary to have one which can have a JSON object fed
     }
 
@@ -31,6 +32,14 @@ public class HomeworkAssignment {
         this.assignmentName = assignmentName;
         this.assignmentDescription = assignmentDescription;
         this.dueDate = dueDate;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getAssignmentDescription() {

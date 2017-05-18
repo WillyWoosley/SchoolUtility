@@ -19,7 +19,6 @@ public class Contact {
     String mEmail;
     boolean mIsTeacher;
     boolean mIsLeader;
-    QuickContactBadge mContactBadge;
     ////////////////////
 
     public Contact() {
@@ -78,13 +77,5 @@ public class Contact {
 
     public void setEmail(String mEmail) {
         this.mEmail = mEmail;
-    }
-
-    public QuickContactBadge getContactBadge() {
-        return mContactBadge;
-    }
-
-    public void setContactBadge(QuickContactBadge mContactBadge) {
-        this.mContactBadge = mContactBadge;
     }
 }

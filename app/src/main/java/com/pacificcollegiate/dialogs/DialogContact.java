@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.gamecodeschool.schoolutility.Contact;
 import com.gamecodeschool.schoolutility.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -28,7 +32,7 @@ public class DialogContact extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.contact_show, null);
-        builder.setView(dialogView).setMessage("My Contact");
+        builder.setView(dialogView);
 
         Button okButton = (Button) dialogView.findViewById(R.id.okContactDialog);
         TextView contactEmail = (TextView) dialogView.findViewById(R.id.contactEmail);

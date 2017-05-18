@@ -26,6 +26,7 @@ public class DialogAssignHomework extends DialogFragment {
     private String mClassName;
 
     static DialogAssignHomework newInstance(String className) {
+        //TODO: Make this so that it will reject the attempted creation if one of the description fields is left blank
         DialogAssignHomework dialogAssignHomework = new DialogAssignHomework();
 
         Bundle args = new Bundle();
@@ -82,11 +83,8 @@ public class DialogAssignHomework extends DialogFragment {
                     {
                         //Creates HomeworkAssignment with the passed parameters and then sends it to the database
                         //TODO: This system needs to change so that different homework assignments will be stored in different children of the "assignments" branch
-                        HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString(), "Placeholde");
+                        HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString(), mClassName);
                         mHomeworkDatabaseReference.push().setValue(homework);
-                        DialogAssignClass assignClass = new DialogAssignClass();
-                        assignClass.show(getFragmentManager(), "");
-
                         dismiss();
                     }
                 }

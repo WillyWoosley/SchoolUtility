@@ -26,6 +26,7 @@ import com.pacificcollegiate.dialogs.DialogAreTeacher;
 import com.pacificcollegiate.dialogs.DialogAssignClass;
 import com.pacificcollegiate.dialogs.DialogAssignHomework;
 import com.pacificcollegiate.dialogs.DialogCreateClass;
+import com.pacificcollegiate.dialogs.DialogCreateClub;
 import com.pacificcollegiate.dialogs.DialogShowHomework;
 
 import java.util.ArrayList;
@@ -178,13 +179,8 @@ public class MainActivity extends AppCompatActivity
         //Checks which button has been pressed from the options menu and acts accordingly
         switch (item.getItemId()) {
             case R.id.settingBar:
-                //TODO: Insert code that will lead to a settings page
-                return true;
-
-            case R.id.addAssignmentDropdown:
-                //Creates a new DialogAssignHomework and displays it
-                DialogAssignClass assignClass = new DialogAssignClass();
-                assignClass.show(getFragmentManager(), "");
+                Intent settingsIntent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(settingsIntent);
                 return true;
 
             case R.id.signOut:
@@ -206,9 +202,6 @@ public class MainActivity extends AppCompatActivity
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Toast.makeText(MainActivity.this, "Signed in!", Toast.LENGTH_SHORT).show();
                 mUsername = user.getDisplayName();
-
-                final MenuItem addAssignment = (MenuItem) findViewById(R.id.addAssignmentDropdown);
-                MenuItem addEvent = (MenuItem) findViewById(R.id.addEventDropdown);
 
                 //Looks in the user portion of the database, and checks if there is already a user with thte Uid of the user currently using the service
                 mUsersDatabaseReference.addListenerForSingleValueEvent(
@@ -279,7 +272,7 @@ public class MainActivity extends AppCompatActivity
 
             mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
         }
-        
+
     }
 
     public void detachDatabaseReadListners() {

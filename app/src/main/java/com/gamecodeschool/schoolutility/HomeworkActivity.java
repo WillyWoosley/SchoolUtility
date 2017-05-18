@@ -1,6 +1,9 @@
 package com.gamecodeschool.schoolutility;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +31,8 @@ public class HomeworkActivity extends AppCompatActivity
 
     //Member Variables//
     private HomeworkAdapter mHomeworkAdapter;
-    private List<String> classesLed = new ArrayList<String>();
+    private ArrayList<String> classesLed = new ArrayList<String>();
+    static private int mStackLevel = 0;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
@@ -85,6 +89,9 @@ public class HomeworkActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         DialogAssignClass assignClass = new DialogAssignClass();
+                        Bundle toPass = new Bundle();
+                        toPass.putStringArrayList("classesLed", classesLed);
+                        assignClass.setArguments(toPass);
                         assignClass.show(getFragmentManager(), "");
                     }
                 }

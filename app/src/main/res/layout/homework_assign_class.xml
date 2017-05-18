@@ -4,16 +4,16 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:text="@string/select_class"
+        android:text="Select a class to add the assignment for:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:textSize="22sp" />
+        android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/classAssignFirst"
@@ -69,15 +69,22 @@
             android:layout_weight="1"
             android:text="sixth" />
 
-
-
     <Button
         android:text="@string/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/assignClassOk"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/classAssignSixth"
         android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/assignClassCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/classAssignSixth"
+        android:text="Cancel"/>
 
 </RelativeLayout>

@@ -7,20 +7,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/quickContactBadge"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="Contact Name"
         android:textSize="24sp" />
-
-    <QuickContactBadge
-        android:id="@+id/quickContactBadge"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="22dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView10"
@@ -46,11 +36,31 @@
         android:layout_toRightOf="@+id/textView10"
         android:layout_toEndOf="@+id/textView10" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactEmail"
+        android:text="Classes Led:"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_alignRight="@id/textView10"/>
+
+    <TextView
+        android:id="@+id/classesLed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Example Classes"
+        android:textSize="18sp"
+        android:layout_alignLeft="@id/contactEmail"
+        android:layout_below="@id/contactEmail"
+        android:layout_marginTop="20dp"/>
+
     <Button
         android:id="@+id/okContactDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/classesLed"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="44dp"
         android:text="@string/ok" />

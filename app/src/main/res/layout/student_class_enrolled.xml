@@ -132,11 +132,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't see your class listed? Your teacher has probably not registered with Puma Planner yet. Just leave the class blank for not and check back later."
-        android:textSize="10sp"
-        android:textColor="@android:color/black"
-        android:gravity="center"
+        android:layout_below="@id/spinnerPeriodSix"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/spinnerPeriodSix"/>
+        android:gravity="center"
+        android:text="Don't see your class listed? Your teacher has probably not registered with Puma Planner yet. Just leave the class blank for now and check back later."
+        android:textColor="@android:color/black"
+        android:textSize="10sp" />
 
 </RelativeLayout>

@@ -8,22 +8,11 @@
         android:title="Settings"
         android:orderInCategory="1"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/addAssignmentDropdown"
-        android:title="Add Assignment"
-        android:orderInCategory="2"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/addEventDropdown"
-        android:title="Add Event"
-        android:orderInCategory="4"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/signOut"
         android:title="Sign Out"
-        android:orderInCategory="5"
+        android:orderInCategory="2"
         app:showAsAction="never" />
 
 </menu>
