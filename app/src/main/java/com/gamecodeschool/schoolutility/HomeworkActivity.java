@@ -4,14 +4,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -40,10 +44,6 @@ public class HomeworkActivity extends AppCompatActivity
     private ChildEventListener mAssignmentChildEventListner;
     private ChildEventListener mClassLedEventListner;
     ////////////////////
-
-    public void onMenubarFragmentInteraction(int position) {
-        //Must be present for Menubar to work
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +108,35 @@ public class HomeworkActivity extends AppCompatActivity
     public void onPause() {
         super.onPause();
         detachDatabaseReadListners();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflate the menu
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Checks which button has been pressed from the options menu and acts accordingly
+        switch (item.getItemId()) {
+            case R.id.settingBar:
+                Intent settingsIntent = new Intent(HomeworkActivity.this, SettingActivity.class);
+                startActivity(settingsIntent);
+                return true;
+
+            case R.id.signOut:
+                //Signs user out
+                AuthUI.getInstance().signOut(this);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onMenubarFragmentInteraction(int position) {
+        //Must be present for Menubar to work
     }
 
     public void attachDatabaseReadListner() {
