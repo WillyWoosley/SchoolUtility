@@ -21,9 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DialogAssignHomework extends DialogFragment {
 
+    //Member Variables//
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mHomeworkDatabaseReference;
     private String mClassName;
+    ////////////////////
 
     static DialogAssignHomework newInstance(String className) {
         //TODO: Make this so that it will reject the attempted creation if one of the description fields is left blank

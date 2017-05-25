@@ -83,13 +83,15 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
 
     <TextView
         android:id="@+id/settingsPeriodOne"
-        android:layout_toRightOf="@id/TextView2"
-        android:layout_alignBaseline="@id/TextView2"
         android:textSize="14sp"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"
+        android:layout_alignBaseline="@+id/TextView2"
+        android:layout_alignBottom="@+id/TextView2"
+        android:layout_toRightOf="@+id/TextView2"
+        android:layout_toEndOf="@+id/TextView2" />
 
     <TextView
         android:id="@+id/settingsPeriodTwo"
@@ -99,7 +101,7 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"/>
 
     <TextView
         android:id="@+id/settingsPeriodThree"
@@ -109,7 +111,7 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"/>
 
     <TextView
         android:id="@+id/settingsPeriodFour"
@@ -119,7 +121,7 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"/>
 
     <TextView
         android:id="@+id/settingsPeriodFive"
@@ -129,7 +131,7 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"/>
 
     <TextView
         android:id="@+id/settingsPeriodSix"
@@ -139,9 +141,10 @@ tools:context="com.gamecodeschool.schoolutility.SettingActivity"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="periodname"/>
+        android:text="Period Name"/>
 
     <TextView
+        android:id="@+id/selectClasses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click here to edit your classes"
