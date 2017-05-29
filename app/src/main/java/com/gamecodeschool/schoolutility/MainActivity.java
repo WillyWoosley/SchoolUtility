@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pacificcollegiate.dialogs.DialogAddArticle;
 import com.pacificcollegiate.dialogs.DialogAreLeader;
 import com.pacificcollegiate.dialogs.DialogAreTeacher;
 import com.pacificcollegiate.dialogs.DialogAssignHomework;
@@ -183,11 +182,6 @@ public class MainActivity extends AppCompatActivity
                 newAssignment.show(getFragmentManager(), "");
                 return true;
 
-            case R.id.addArticleDropdown:
-                //Creates a new DialogAddArticle and displays it
-                DialogAddArticle newArticle = new DialogAddArticle();
-                newArticle.show(getFragmentManager(), null);
-                return true;
 
             case R.id.signOut:
                 //Signs user out

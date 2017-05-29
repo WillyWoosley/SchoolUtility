@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/colorMenuBar"
-        app:srcCompat="@drawable/homework_icon" />
+        app:srcCompat="@drawable/homework_icon3" />
 
     <ImageButton
         android:id="@+id/mainEvents"

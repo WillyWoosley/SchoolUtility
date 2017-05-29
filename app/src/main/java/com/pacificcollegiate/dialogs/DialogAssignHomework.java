@@ -43,7 +43,7 @@ public class DialogAssignHomework extends DialogFragment {
         Button btnCancel = (Button) dialogView.findViewById(R.id.assign_description_cancel);
         Button btnContinue = (Button) dialogView.findViewById(R.id.assign_description_continue);
 
-        builder.setView(dialogView).setMessage("New Assignment:");
+        builder.setView(dialogView);  //.setMessage("New Assignment:");
 
 
         btnCancel.setOnClickListener(
