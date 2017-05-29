@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/assignment_imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/event_icon" />
+
+    <TextView
+        android:id="@+id/assignment_name_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/assignment_imageView"
+        android:layout_toRightOf="@+id/assignment_imageView"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/duetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/assignment_imageView"
+        android:layout_toRightOf="@+id/assignment_imageView"
+        android:layout_toEndOf="@+id/assignment_imageView"
+        android:layout_marginBottom="22dp" />
+
+    <TextView
+        android:id="@+id/due_date_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/assignment_imageView"
+        android:layout_toRightOf="@+id/duetext"
+        android:layout_toEndOf="@+id/duetext"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="5dp"/>
+
+</RelativeLayout>
