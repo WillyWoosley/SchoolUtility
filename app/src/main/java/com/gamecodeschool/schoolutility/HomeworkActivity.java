@@ -1,9 +1,5 @@
 package com.gamecodeschool.schoolutility;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,8 +19,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pacificcollegiate.dialogs.DialogAssignClass;
-import com.pacificcollegiate.dialogs.DialogAssignHomework;
 import com.pacificcollegiate.dialogs.DialogShowHomework;
 
 import java.util.ArrayList;
@@ -36,17 +32,21 @@ public class HomeworkActivity extends AppCompatActivity
     //Member Variables//
     private HomeworkAdapter mHomeworkAdapter;
     private ArrayList<String> classesLed = new ArrayList<String>();
+    private ArrayList<String> homeworkAssigned = new ArrayList<String>();
     static private int mStackLevel = 0;
 
     private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mHomeworkAssignedReference;
     private DatabaseReference mAssignmentDatabaseReference;
     private DatabaseReference userClassRef;
-    private ChildEventListener mAssignmentChildEventListner;
+    private ChildEventListener mZssignmentChildEventListner;
+    private ChildEventListener mHomeworkAssignedChildEventListener;
     private ChildEventListener mClassLedEventListner;
     ////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: Clean this up, pending its continuing working
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homework);
 
@@ -54,9 +54,11 @@ public class HomeworkActivity extends AppCompatActivity
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         //Firebase Database References
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userClassRef = mFirebaseDatabase.getReference().child("users").child(currentUser).child("classesTaught");
+        mHomeworkAssignedReference = mFirebaseDatabase.getReference();
         mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        userClassRef = mFirebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("classesTaught");
+
 
         //Sets up the HomeworkAssignment list, adapter, and ListView
         List<HomeworkAssignment> homeworkAssignments = new ArrayList<>();
@@ -140,8 +142,41 @@ public class HomeworkActivity extends AppCompatActivity
     }
 
     public void attachDatabaseReadListner() {
-        if (mAssignmentChildEventListner == null) {
-            mAssignmentChildEventListner = new  ChildEventListener() {
+
+        /*if (mHomeworkAssignedChildEventListener == null) {
+            mHomeworkAssignedChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    homeworkAssigned.add(dataSnapshot.getKey());
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+            mHomeworkAssignedReference.addChildEventListener(mHomeworkAssignedChildEventListener);
+        }
+
+
+        if (mZssignmentChildEventListner == null) {
+            mZssignmentChildEventListner = new  ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
@@ -157,8 +192,51 @@ public class HomeworkActivity extends AppCompatActivity
                 public void onCancelled(DatabaseError databaseError) {}
             };
 
-            mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
-        }
+            mAssignmentDatabaseReference.addChildEventListener(mZssignmentChildEventListner);
+        }*/
+
+
+        mHomeworkAssignedReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        mHomeworkAdapter.clear();
+                        mHomeworkAdapter.notifyDataSetChanged();
+
+                        for (DataSnapshot specifcSnapshot: dataSnapshot.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("homeworkAssigned").getChildren()) {
+                            homeworkAssigned.add(specifcSnapshot.getKey());
+                        }
+
+                        for (DataSnapshot specificSnapshot: dataSnapshot.child("assignments").getChildren()) {
+                            if (homeworkAssigned.contains(specificSnapshot.getKey())) {
+                                HomeworkAssignment homeworkAssignment = specificSnapshot.getValue(HomeworkAssignment.class);
+                                mHomeworkAdapter.add(homeworkAssignment);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                }
+        );
+
+        /*mAssignmentDatabaseReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot specificSnapshot: dataSnapshot.getChildren()) {
+                            HomeworkAssignment homeworkAssignment = specificSnapshot.getValue(HomeworkAssignment.class);
+                            mHomeworkAdapter.add(homeworkAssignment);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                }
+        );*/
 
         if (mClassLedEventListner == null) {
             mClassLedEventListner = new ChildEventListener() {
@@ -182,14 +260,19 @@ public class HomeworkActivity extends AppCompatActivity
 
     public void detachDatabaseReadListners() {
         //TODO: Make this detach other ChildEventListner's if they get added, or disregard if they do not
-        if (mAssignmentChildEventListner != null) {
-            mAssignmentDatabaseReference.removeEventListener(mAssignmentChildEventListner);
-            mAssignmentChildEventListner = null;
+        if (mZssignmentChildEventListner != null) {
+            mAssignmentDatabaseReference.removeEventListener(mZssignmentChildEventListner);
+            mZssignmentChildEventListner = null;
         }
 
         if (mClassLedEventListner != null)  {
             userClassRef.removeEventListener(mClassLedEventListner);
             mClassLedEventListner = null;
+        }
+
+        if (mHomeworkAssignedChildEventListener != null) {
+            userClassRef.removeEventListener(mHomeworkAssignedChildEventListener);
+            mHomeworkAssignedChildEventListener = null;
         }
     }
 }

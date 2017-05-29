@@ -31,7 +31,7 @@ public class DialogAssignHomework extends DialogFragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mHomeworkDatabaseReference;
     private DatabaseReference mUsersReference;
-    private DatabaseReference mUsersAssignmentsReference;
+    private String mCurrentUser;
     private String mClassName;
     ////////////////////
 
@@ -61,6 +61,7 @@ public class DialogAssignHomework extends DialogFragment {
 
         //Initializes database and reference to assignments branch
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mUsersReference = mFirebaseDatabase.getReference().child("users");
         mHomeworkDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
 
@@ -105,26 +106,29 @@ public class DialogAssignHomework extends DialogFragment {
         return builder.create();
     }
 
-    public void assignWorkToStudents(String hwUid) {
+    public void assignWorkToStudents(final String hwUid) {
         mUsersReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        //TODO: Can make this more efficient if it first checks for if the user is a teacher or not
+                        //TODO: Can also make this add the homework that has been assigned to a teachers view as assigned homework
+                        //TODO: This is always running, but that maynbe fine
                         for (DataSnapshot specificSnapshot: dataSnapshot.getChildren()) {
+                            String user = specificSnapshot.getKey();
+                            if (mCurrentUser.equals(user)) {
+                                mUsersReference.child(user).child("homeworkAssigned").child(hwUid).setValue(true);
+                            }
                             DataSnapshot usersClasses = specificSnapshot.child("classesEnrolled");
-                            //String user = specificSnapshot.getKey();
                             for (DataSnapshot test : usersClasses.getChildren()) {
-                                if (test.getValue() == mClassName) {
-                                    Toast.makeText(getContext(), "Got Here", Toast.LENGTH_SHORT).show();
+                                if (test.getValue().equals(mClassName)) {
+                                    mUsersReference.child(user).child("homeworkAssigned").child(hwUid).setValue(true);
                                 }
                             }
                         }
                     }
-
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 }
         );
     }

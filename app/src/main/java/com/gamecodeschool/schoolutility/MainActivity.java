@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     //TODO: Make the homework listview items images/background vary based upon assignment type/class
     //TODO: Fill in menubar placeholder assets with real images
     //TODO: Make some sort of display that notifies a user of new things that is worth their seeing ("worth seeing" can be set in settings). This will need to use a Transaction
+    //TODO: You can only log out from the MainActivity page
 
 
 
