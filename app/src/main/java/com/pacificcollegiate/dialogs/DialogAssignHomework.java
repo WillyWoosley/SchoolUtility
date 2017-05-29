@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +13,13 @@ import android.widget.Toast;
 
 import com.gamecodeschool.schoolutility.HomeworkAssignment;
 import com.gamecodeschool.schoolutility.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by wdwoo on 3/15/2017.
@@ -24,6 +30,8 @@ public class DialogAssignHomework extends DialogFragment {
     //Member Variables//
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mHomeworkDatabaseReference;
+    private DatabaseReference mUsersReference;
+    private DatabaseReference mUsersAssignmentsReference;
     private String mClassName;
     ////////////////////
 
@@ -53,8 +61,8 @@ public class DialogAssignHomework extends DialogFragment {
 
         //Initializes database and reference to assignments branch
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mUsersReference = mFirebaseDatabase.getReference().child("users");
         mHomeworkDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
-
 
         //References to all the objects in the dialog
         final EditText assignName = (EditText) dialogView.findViewById(R.id.assign_homework_title);
@@ -86,12 +94,38 @@ public class DialogAssignHomework extends DialogFragment {
                         //Creates HomeworkAssignment with the passed parameters and then sends it to the database
                         //TODO: This system needs to change so that different homework assignments will be stored in different children of the "assignments" branch
                         HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString(), mClassName);
-                        mHomeworkDatabaseReference.push().setValue(homework);
+                        String assignmentUid = mHomeworkDatabaseReference.push().getKey();
+                        mHomeworkDatabaseReference.child(assignmentUid).setValue(homework);
+                        assignWorkToStudents(assignmentUid);
                         dismiss();
                     }
                 }
         );
 
         return builder.create();
+    }
+
+    public void assignWorkToStudents(String hwUid) {
+        mUsersReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot specificSnapshot: dataSnapshot.getChildren()) {
+                            DataSnapshot usersClasses = specificSnapshot.child("classesEnrolled");
+                            //String user = specificSnapshot.getKey();
+                            for (DataSnapshot test : usersClasses.getChildren()) {
+                                if (test.getValue() == mClassName) {
+                                    Toast.makeText(getContext(), "Got Here", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                }
+        );
     }
 }
