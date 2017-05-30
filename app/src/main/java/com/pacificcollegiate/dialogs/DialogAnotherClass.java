@@ -16,8 +16,7 @@ public class DialogAnotherClass extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("If you have another class that you teach, click 'Add Another'," +
-                " otherwise, hit continue. You can always add more or see which classes you lead" +
-                " from the settings page")
+                " otherwise, hit continue")
             .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

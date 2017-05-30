@@ -1,6 +1,7 @@
 package com.gamecodeschool.schoolutility;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.*;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     //TODO: Fill in menubar placeholder assets with real images
     //TODO: Make some sort of display that notifies a user of new things that is worth their seeing ("worth seeing" can be set in settings). This will need to use a Transaction
     //TODO: You can only log out from the MainActivity page
+    //TODO: Make it so this behaves like HomeworkActivity in terms of assignment inflation
 
 
 
@@ -59,14 +62,16 @@ public class MainActivity extends AppCompatActivity
 
     private HomeworkAdapter mHomeworkAdapter;
     private String mUsername;
+    private EventAdapter mEventAdapter;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListner;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAssignmentDatabaseReference;
     private DatabaseReference mUsersDatabaseReference;
-    private DatabaseReference mContactDatabaseReference;
+    private DatabaseReference mEventsDatabaseReference;
     private ChildEventListener mAssignmentChildEventListner;
+    private ChildEventListener mEventChildEventListner;
     ////////////////////
 
     public void onMenubarFragmentInteraction(int position) {
@@ -87,15 +92,24 @@ public class MainActivity extends AppCompatActivity
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+
+
         //Firebase Database References
         mAssignmentDatabaseReference = mFirebaseDatabase.getReference().child("assignments");
         mUsersDatabaseReference = mFirebaseDatabase.getReference().child("users");
+        mEventsDatabaseReference = mFirebaseDatabase.getReference().child("events");
 
         //Sets up the HomeworkAssignment list, adapter, and ListView
         List<HomeworkAssignment> homeworkAssignments = new ArrayList<>();
         mHomeworkAdapter = new HomeworkAdapter(this, R.layout.homework_listview, homeworkAssignments);
         ListView listAssignment = (ListView) findViewById(R.id.homework_listview_display);
         listAssignment.setAdapter(mHomeworkAdapter);
+
+        //Sets up Events list, adapter, and ListView
+        List<Events> events = new ArrayList<>();
+        mEventAdapter = new EventAdapter(this, R.layout.event_listview, events);
+        ListView listEvents = (ListView) findViewById(R.id.mainEventListViewDisplay);
+        listEvents.setAdapter(mEventAdapter);
 
 
         listAssignment.setOnItemClickListener(
@@ -235,6 +249,10 @@ public class MainActivity extends AppCompatActivity
     public void onSignedInInitialize(final FirebaseUser user) {
         //Sets username and attaches ChildEventListner
         mUsername = user.getDisplayName();
+        TextView greeting = (TextView) findViewById(R.id.mainGreeting);
+        greeting.setTypeface(null, Typeface.ITALIC);
+        String formattedGreeting = "Welcome " + mUsername + ", to Puma Planner";
+        greeting.setText(formattedGreeting);
         attachDatabaseReadListner();
     }
 
@@ -268,6 +286,38 @@ public class MainActivity extends AppCompatActivity
             mAssignmentDatabaseReference.addChildEventListener(mAssignmentChildEventListner);
         }
 
+        if (mEventChildEventListner == null) {
+            mEventChildEventListner = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Events event = dataSnapshot.getValue(Events.class);
+                    mEventAdapter.add(event);
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+            mEventsDatabaseReference.addChildEventListener(mEventChildEventListner);
+        }
+
     }
 
     public void detachDatabaseReadListners() {
@@ -275,6 +325,11 @@ public class MainActivity extends AppCompatActivity
         if (mAssignmentChildEventListner != null) {
             mAssignmentDatabaseReference.removeEventListener(mAssignmentChildEventListner);
             mAssignmentChildEventListner = null;
+        }
+
+        if (mEventChildEventListner != null) {
+            mEventsDatabaseReference.removeEventListener(mEventChildEventListner);
+            mEventChildEventListner = null;
         }
     }
 }

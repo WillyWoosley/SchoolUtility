@@ -31,6 +31,7 @@ public class DialogAssignHomework extends DialogFragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mHomeworkDatabaseReference;
     private DatabaseReference mUsersReference;
+    private ValueEventListener testListener;
     private String mCurrentUser;
     private String mClassName;
     ////////////////////
@@ -93,9 +94,9 @@ public class DialogAssignHomework extends DialogFragment {
                     public void onClick(View v)
                     {
                         //Creates HomeworkAssignment with the passed parameters and then sends it to the database
-                        //TODO: This system needs to change so that different homework assignments will be stored in different children of the "assignments" branch
-                        HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString(), mClassName);
+                        //TODO: This system needs to change so that different homework assignments will be stored in different children of the "assignments" branch\
                         String assignmentUid = mHomeworkDatabaseReference.push().getKey();
+                        HomeworkAssignment homework = new HomeworkAssignment(assignName.getText().toString(), assignDescript.getText().toString(), assignDate.getText().toString(), mClassName, assignmentUid);
                         mHomeworkDatabaseReference.child(assignmentUid).setValue(homework);
                         assignWorkToStudents(assignmentUid);
                         dismiss();
@@ -107,8 +108,7 @@ public class DialogAssignHomework extends DialogFragment {
     }
 
     public void assignWorkToStudents(final String hwUid) {
-        mUsersReference.addValueEventListener(
-                new ValueEventListener() {
+                testListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //TODO: Can make this more efficient if it first checks for if the user is a teacher or not
@@ -129,7 +129,12 @@ public class DialogAssignHomework extends DialogFragment {
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {}
-                }
-        );
+                };
+
+                mUsersReference.addValueEventListener(testListener);
+    }
+
+    public void removeListeners() {
+        mUsersReference.removeEventListener(testListener);
     }
 }

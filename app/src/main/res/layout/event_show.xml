@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/show_homework_description"
+        android:id="@+id/eventShowDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/show_homework_name"
+        android:layout_below="@+id/eventShowName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/show_homework_name"
+        android:id="@+id/eventShowName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,34 +26,34 @@
         android:textSize="24sp"
         android:textStyle="normal|bold" />
 
-    <Button
-        android:text="Not Done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cancel_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp" />
-
-    <Button
-        android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_alignTop="@id/cancel_button"
-        android:text="Done" />
-
     <TextView
-        android:id="@+id/show_due_date"
+        android:id="@+id/eventShowDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cancel_button"
+        android:layout_below="@id/eventShowDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="normal|bold" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/eventShowTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventShowDate"
+        android:text="TextView"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventShowTime"
+        android:layout_centerHorizontal="true"
+        android:text="OK" />
+
+
 </RelativeLayout>

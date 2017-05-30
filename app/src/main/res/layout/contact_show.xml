@@ -5,6 +5,7 @@
 
     <TextView
         android:id="@+id/textView6"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -13,55 +14,22 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email:"
-        android:textSize="18sp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_marginTop="26dp" />
-
-    <TextView
+        android:textColor="@android:color/black"
         android:id="@+id/contactEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email@email.com"
         android:textSize="18sp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_alignBaseline="@+id/textView10"
-        android:layout_alignBottom="@+id/textView10"
-        android:layout_toRightOf="@+id/textView10"
-        android:layout_toEndOf="@+id/textView10" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/contactEmail"
-        android:text="Classes Led:"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:layout_alignRight="@id/textView10"/>
-
-    <TextView
-        android:id="@+id/classesLed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Example Classes"
-        android:textSize="18sp"
-        android:layout_alignLeft="@id/contactEmail"
-        android:layout_below="@id/contactEmail"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@id/textView6"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/okContactDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/classesLed"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:text="@string/ok" />
+        android:text="@string/ok"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/contactEmail"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

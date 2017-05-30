@@ -33,7 +33,6 @@ public class HomeworkActivity extends AppCompatActivity
     private HomeworkAdapter mHomeworkAdapter;
     private ArrayList<String> classesLed = new ArrayList<String>();
     private ArrayList<String> homeworkAssigned = new ArrayList<String>();
-    static private int mStackLevel = 0;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mHomeworkAssignedReference;
@@ -76,10 +75,6 @@ public class HomeworkActivity extends AppCompatActivity
                         DialogShowHomework showHomework = new DialogShowHomework();
                         showHomework.sendHomework(tempAssignment);
                         showHomework.show(getFragmentManager(), "");
-
-                        for (String s : classesLed) {
-                            Toast.makeText(HomeworkActivity.this, s, Toast.LENGTH_SHORT).show();
-                        }
                     }
                 }
         );
@@ -143,59 +138,6 @@ public class HomeworkActivity extends AppCompatActivity
 
     public void attachDatabaseReadListner() {
 
-        /*if (mHomeworkAssignedChildEventListener == null) {
-            mHomeworkAssignedChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    homeworkAssigned.add(dataSnapshot.getKey());
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-
-            mHomeworkAssignedReference.addChildEventListener(mHomeworkAssignedChildEventListener);
-        }
-
-
-        if (mZssignmentChildEventListner == null) {
-            mZssignmentChildEventListner = new  ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    HomeworkAssignment homeworkAssignment = dataSnapshot.getValue(HomeworkAssignment.class);
-                    mHomeworkAdapter.add(homeworkAssignment);
-                }
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {}
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            };
-
-            mAssignmentDatabaseReference.addChildEventListener(mZssignmentChildEventListner);
-        }*/
-
-
         mHomeworkAssignedReference.addValueEventListener(
                 new ValueEventListener() {
                     @Override
@@ -220,23 +162,6 @@ public class HomeworkActivity extends AppCompatActivity
                     public void onCancelled(DatabaseError databaseError) {}
                 }
         );
-
-        /*mAssignmentDatabaseReference.addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot specificSnapshot: dataSnapshot.getChildren()) {
-                            HomeworkAssignment homeworkAssignment = specificSnapshot.getValue(HomeworkAssignment.class);
-                            mHomeworkAdapter.add(homeworkAssignment);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                }
-        );*/
 
         if (mClassLedEventListner == null) {
             mClassLedEventListner = new ChildEventListener() {
@@ -274,5 +199,6 @@ public class HomeworkActivity extends AppCompatActivity
             userClassRef.removeEventListener(mHomeworkAssignedChildEventListener);
             mHomeworkAssignedChildEventListener = null;
         }
+
     }
 }

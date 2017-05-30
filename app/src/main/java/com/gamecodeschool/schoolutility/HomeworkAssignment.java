@@ -20,11 +20,19 @@ public class HomeworkAssignment {
     private String assignmentType;
     private String classType;
     private String dueDate;
+    private String hwUid;
     ////////////////////
 
-    public HomeworkAssignment() {
+    public String getHwUid() {
+        return hwUid;
+    }
 
-        //empty constructor, necesary to have one which can have a JSON object fed
+    public HomeworkAssignment(String assignmentName, String assignmentDescription, String dueDate, String className, String hwUid) {
+        this.className = className;
+        this.assignmentName = assignmentName;
+        this.assignmentDescription = assignmentDescription;
+        this.dueDate = dueDate;
+        this.hwUid = hwUid;
     }
 
     public HomeworkAssignment(String assignmentName, String assignmentDescription, String dueDate, String className) {
@@ -82,5 +90,11 @@ public class HomeworkAssignment {
         this.assignmentName = assignmentName;
     }
 
+    public void setHwUid(String hwUid) {
+        this.hwUid = hwUid;
+    }
 
+    public HomeworkAssignment() {
+        //empty constructor, necesary to have one which can have a JSON object fed
+    }
 }
