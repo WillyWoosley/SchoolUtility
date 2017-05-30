@@ -30,6 +30,8 @@ public class DialogAreTeacher extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO: Lead in to another Dialog which asks the user to authnenticate before setting this
                         usersDatabaseReference.child("isTeacher").setValue(true);
+                        DialogCreateClass createClass = new DialogCreateClass();
+                        createClass.show(getFragmentManager(), "");
                         dismiss();
                     }
                 })

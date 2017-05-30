@@ -4,54 +4,27 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:layout_margin="10dp">
 
-    <QuickContactBadge
-        android:id="@+id/QuickContactBadge1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
-
     <TextView
-        android:id="@+id/showContactName"
-        android:layout_below="@id/QuickContactBadge1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="person_name"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"/>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_below="@id/showContactName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Email:"
+        android:id="@+id/textView6"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Contact Name"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/showContactEmail"
-        android:layout_below="@id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="person_email"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:textSize="18sp"
+        android:layout_below="@id/textView6"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"/>
         android:textColor="@android:color/black"
         />
 
@@ -59,8 +32,8 @@
         android:id="@+id/showContactOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="OK"/>
-
+        android:text="@string/ok"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/contactEmail"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

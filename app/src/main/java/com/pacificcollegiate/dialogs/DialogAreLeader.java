@@ -28,8 +28,9 @@ public class DialogAreLeader extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO: Lead in to a dialog that will ask the teacher to somehow validate, and potentially lead in to asking which classes they teach
-                        //Placeholder
                         usersDatabaseReference.child("isLeader").setValue(true);
+                        DialogCreateClub createClub = new DialogCreateClub();
+                        createClub.show(getFragmentManager(), "");
                         dismiss();
                     }
                 })

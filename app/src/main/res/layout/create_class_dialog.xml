@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_margin="10dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please input some information about the class that you lead:"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
+        android:text="Enter the name of your class:"/>
+
+    <EditText
+        android:id="@+id/className"
+        android:layout_below="@id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="Class Name"
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/className"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+        android:text="Select the periods this class meets:"/>
+
+    <CheckBox
+        android:id="@+id/firstPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:text="1st Period"
+        android:textColor="@android:color/black"/>
+
+
+    <CheckBox
+        android:id="@+id/secondPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstPeriod"
+        android:layout_centerHorizontal="true"
+        android:text="2nd Period"
+        android:textColor="@android:color/black"/>
+
+
+    <CheckBox
+        android:id="@+id/thirdPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/secondPeriod"
+        android:layout_centerHorizontal="true"
+        android:text="3rd Period"
+        android:textColor="@android:color/black"/>
+
+
+    <CheckBox
+        android:id="@+id/fourthPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thirdPeriod"
+        android:layout_centerHorizontal="true"
+        android:text="4th Period"
+        android:textColor="@android:color/black"/>
+
+
+    <CheckBox
+        android:id="@+id/fifthPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fourthPeriod"
+        android:layout_centerHorizontal="true"
+        android:text="5th Period"
+        android:textColor="@android:color/black"/>
+
+
+    <CheckBox
+        android:id="@+id/sixthPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fifthPeriod"
+        android:layout_centerHorizontal="true"
+        android:text="6th Period"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:text="Continue"
+        />
+
+    <!--TODO: Perhaps include the option here to spceify more about your class, such as icon to be displayed with homework, or a short text blurb about it. Easy to implement later on, simple entry and retrieval-->
+
+
+</RelativeLayout>

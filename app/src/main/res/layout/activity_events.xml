@@ -8,6 +8,31 @@
     tools:context="com.gamecodeschool.schoolutility.EventsActivity">
 
 
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/eventsMenubar">
+
+        <Button
+            android:id="@+id/testButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add an event"
+            android:layout_alignParentTop="true"/>
+
+        <ListView
+            android:id="@+id/eventListViewDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/event_listview"
+            android:layout_below="@+id/testButton"
+            android:layout_above="@id/eventsMenubar">
+        </ListView>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -63,7 +88,6 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         tools:layout="@layout/menubar_fragment" />
-
 
 
 </RelativeLayout>

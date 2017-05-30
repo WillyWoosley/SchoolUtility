@@ -22,18 +22,12 @@
         android:alpha=".05"
         app:srcCompat="@drawable/pcs_logo" />
 
-    <SearchView
-        android:id="@+id/contactSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </SearchView>
 
     <ListView
         android:id="@+id/contact_listview_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/contactSearchView"
         tools:listitem="@layout/contact_listview"
-        android:layout_above="@id/contactsMenubar"/>
+        android:layout_alignParentTop="true"/>
 
 </RelativeLayout>

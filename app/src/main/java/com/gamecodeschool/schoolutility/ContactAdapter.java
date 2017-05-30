@@ -35,8 +35,21 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         Contact tempContact = getItem(whichItem);
 
         TextView contactName = (TextView) view.findViewById(R.id.contactName);
+        TextView isTeacher = (TextView) view.findViewById(R.id.isTeacher);
+        TextView isLeader = (TextView) view.findViewById(R.id.isLeader);
         contactName.setText(tempContact.getName());
-        //TODO: Implement something which changes contact badges. This will also probably have to be tied in with account creeation
+
+        if (tempContact.isIsTeacher()) {
+            isTeacher.setText(R.string.teacher);
+        } else {
+            isTeacher.setText(R.string.student);
+        }
+
+        if (tempContact.isIsLeader()) {
+            isLeader.setText(R.string.leader);
+        } else {
+            isLeader.setVisibility(View.GONE);
+        }
 
         return view;
     }

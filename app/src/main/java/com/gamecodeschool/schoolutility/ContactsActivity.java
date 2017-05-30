@@ -1,10 +1,13 @@
 package com.gamecodeschool.schoolutility;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +17,9 @@ import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,13 +64,7 @@ public class ContactsActivity extends AppCompatActivity
                    }
                }
        );
-    }
 
-    @Override
-    public void onMenubarFragmentInteraction(int position)
-    {
-        //placeholder interaction listener which must be implemented
-        //and can be filled with specific actions to be taken when clicked
     }
 
     @Override
@@ -77,6 +77,37 @@ public class ContactsActivity extends AppCompatActivity
     public void onPause() {
         super.onPause();
         detachDatabaseReadListners();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflate the menu
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Checks which button has been pressed from the options menu and acts accordingly
+        switch (item.getItemId()) {
+            case R.id.settingBar:
+                Intent settingsIntent = new Intent(ContactsActivity.this, SettingActivity.class);
+                startActivity(settingsIntent);
+                return true;
+
+            case R.id.signOut:
+                //Signs user out
+                AuthUI.getInstance().signOut(this);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onMenubarFragmentInteraction(int position) {
+        //placeholder interaction listener which must be implemented
+        //and can be filled with specific actions to be taken when clicked
     }
 
     public void attachDatabaseReadListener() {

@@ -17,6 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".HomeworkActivity"
             android:label="@string/homework"
             android:screenOrientation="portrait" />
@@ -30,8 +31,6 @@
             android:label="@string/contacts"
             android:screenOrientation="portrait"/>
         <activity android:name=".CollectionAnnouncementActivity"></activity>
-
-
 
     </application>
 

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.gamecodeschool.schoolutility.SettingActivity"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/TextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Classes:"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/TextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period One: "
+        android:textColor="@android:color/black"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView1"/>
+
+    <TextView
+        android:id="@+id/TextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Two: "
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView2"/>
+
+    <TextView
+        android:id="@+id/TextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Three: "
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView3"/>
+
+    <TextView
+        android:id="@+id/TextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Four: "
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView4"/>
+
+    <TextView
+        android:id="@+id/TextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Five: "
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView5"/>
+
+    <TextView
+        android:id="@+id/TextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Six: "
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:layout_below="@id/TextView6"/>
+
+    <TextView
+        android:id="@+id/settingsPeriodOne"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"
+        android:layout_alignBaseline="@+id/TextView2"
+        android:layout_alignBottom="@+id/TextView2"
+        android:layout_toRightOf="@+id/TextView2"
+        android:layout_toEndOf="@+id/TextView2" />
+
+    <TextView
+        android:id="@+id/settingsPeriodTwo"
+        android:layout_toRightOf="@id/TextView3"
+        android:layout_alignBaseline="@id/TextView3"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"/>
+
+    <TextView
+        android:id="@+id/settingsPeriodThree"
+        android:layout_toRightOf="@id/TextView4"
+        android:layout_alignBaseline="@id/TextView4"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"/>
+
+    <TextView
+        android:id="@+id/settingsPeriodFour"
+        android:layout_toRightOf="@id/TextView5"
+        android:layout_alignBaseline="@id/TextView5"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"/>
+
+    <TextView
+        android:id="@+id/settingsPeriodFive"
+        android:layout_toRightOf="@id/TextView6"
+        android:layout_alignBaseline="@id/TextView6"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"/>
+
+    <TextView
+        android:id="@+id/settingsPeriodSix"
+        android:layout_toRightOf="@id/TextView7"
+        android:layout_alignBaseline="@id/TextView7"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Period Name"/>
+
+    <TextView
+        android:id="@+id/selectClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here to edit your classes"
+        android:layout_below="@id/TextView7"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

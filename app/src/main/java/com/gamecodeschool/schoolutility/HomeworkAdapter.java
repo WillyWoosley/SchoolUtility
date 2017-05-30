@@ -24,8 +24,7 @@ public class HomeworkAdapter extends ArrayAdapter<HomeworkAssignment> {
     }
 
     @Override
-    public View getView(int whichItem, View view, ViewGroup viewGroup)
-    {
+    public View getView(int whichItem, View view, ViewGroup viewGroup) {
         //Inflates view if it hasn't been
         if (view==null) {
             view = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.homework_listview, viewGroup, false);
@@ -37,7 +36,6 @@ public class HomeworkAdapter extends ArrayAdapter<HomeworkAssignment> {
         //Create references to all pertinent areas of layout
         TextView assignmentName = (TextView) view.findViewById(R.id.assignment_name_display);
         TextView dueDate = (TextView) view.findViewById(R.id.due_date_display);
-        ImageView assignmentImage = (ImageView) view.findViewById(R.id.assignment_imageView);
 
         //Set the date, name, and image
         assignmentName.setText(tempAssignment.getAssignmentName());

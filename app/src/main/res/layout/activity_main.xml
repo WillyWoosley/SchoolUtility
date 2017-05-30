@@ -32,16 +32,31 @@
         tools:listitem="@layout/homework_listview"/>
 
     <RelativeLayout
+        android:id="@+id/testId"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/homework_listview_display">
+        android:layout_height="150dp"
+        android:layout_below="@id/homework_listview_display"
+        android:gravity="center">
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/mainGreeting"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is where events will be"
-            android:layout_centerInParent="true"
-            android:gravity="center"/>
+            android:text="greeting"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"/>
+
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/mainEventListViewDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/mainMenubar"
+        android:layout_below="@id/testId"
+        tools:listitem="@layout/event_listview">
+    </ListView>
 
 
 </RelativeLayout>
