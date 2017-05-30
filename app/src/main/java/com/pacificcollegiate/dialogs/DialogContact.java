@@ -25,7 +25,9 @@ import org.w3c.dom.Text;
 
 public class DialogContact extends DialogFragment {
 
-    Contact mContact;
+    //Member Variables//
+    private Contact mContact;
+    ////////////////////
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,7 +43,6 @@ public class DialogContact extends DialogFragment {
         contactEmail.setText(mContact.getEmail());
         contactName.setText(mContact.getName());
 
-
         okButton.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -56,6 +57,7 @@ public class DialogContact extends DialogFragment {
         return builder.create();
     }
 
+    //Used to pass Contact
     public void sendContact(Contact contact) {
         mContact = contact;
     }

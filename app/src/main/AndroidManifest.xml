@@ -17,12 +17,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeworkActivity" />
-        <activity android:name=".NewsActivity" />
-        <activity android:name=".EventsActivity" />
-        <activity android:name=".ContactsActivity" />
-        <activity android:name=".CollectionAnnouncementActivity" />
-        <activity android:name=".SettingActivity"></activity>
+
+        <activity android:name=".HomeworkActivity"
+            android:label="@string/homework"
+            android:screenOrientation="portrait" />
+        <activity android:name=".NewsActivity"
+            android:label="@string/the_roar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EventsActivity"
+            android:label="@string/calendar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ContactsActivity"
+            android:label="@string/contacts"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CollectionAnnouncementActivity"></activity>
+
     </application>
 
 </manifest>

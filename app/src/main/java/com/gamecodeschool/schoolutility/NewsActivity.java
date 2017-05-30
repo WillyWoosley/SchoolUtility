@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.firebase.ui.auth.AuthUI;
 
@@ -15,17 +16,16 @@ import java.net.URI;
 public class NewsActivity extends AppCompatActivity
     implements MenubarFragment.OnFragmentInteractionListener {
 
+    public WebView mWebView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        //TODO: Replace this with something that will not just redirect to the ROAR homepage
-        //WebView testWeb = (WebView) findViewById(R.id.testWebView);
-        //testWeb.loadUrl("http://www.pcsroar.com/");
-        Uri uri = Uri.parse("http://www.pcsroar.com/");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        mWebView = (WebView) findViewById(R.id.newsWebView);
+        mWebView.loadUrl("http://www.pcsroar.com/");
+        mWebView.setWebViewClient(new WebViewClient());
     }
 
     @Override

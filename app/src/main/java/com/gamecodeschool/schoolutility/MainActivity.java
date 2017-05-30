@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pacificcollegiate.dialogs.DialogAddArticle;
 import com.pacificcollegiate.dialogs.DialogAreLeader;
 import com.pacificcollegiate.dialogs.DialogAreTeacher;
 import com.pacificcollegiate.dialogs.DialogAssignClass;
@@ -191,7 +190,6 @@ public class MainActivity extends AppCompatActivity
                 Intent settingsIntent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(settingsIntent);
                 return true;
-
             case R.id.signOut:
                 //Signs user out
                 AuthUI.getInstance().signOut(this);

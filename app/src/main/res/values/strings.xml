@@ -4,9 +4,9 @@
     <string name="homework_science">Science</string>
 
     //For homework assignment
-    <string name="assignment_name">Assignment Name</string>
-    <string name="assignment_description">Assignment Description</string>
-    <string name="due_date">Due Date</string>
+    <string name="assignment_name">What\'s the name?</string>
+    <string name="assignment_description">Type a description...</string>
+    <string name="due_date">When is it due?</string>
     <string name="enter_name">Give your assignment a name:</string>
     <string name="enter_description">Give a description of the assignment</string>
     <string name="select_type">Please select an assignment type:</string>
@@ -25,6 +25,7 @@
 
     //General purpose
     <string name="forward">Continue</string>
+    <string name="post">Post</string>
     <string name="ok">OK</string>
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
@@ -47,5 +48,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    //string for search hint
+    <string name="search_hint">Search Contacts</string>
+
+    //strings to identify each page
+    <string name="contacts">Contacts</string>
+    <string name="calendar">Calendar</string>
+    <string name="the_roar">The Roar</string>
+    <string name="homework">Homework</string>
 
 </resources>

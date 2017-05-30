@@ -24,10 +24,12 @@ import org.w3c.dom.Text;
 
 public class DialogShowHomework extends DialogFragment {
 
+    //Member Variables//
     private HomeworkAssignment mHomework;
     private FirebaseDatabase mRootDatabase;
     private DatabaseReference mHomeworkAssignedReference;
     private String mCurrentUser;
+    ////////////////////
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)

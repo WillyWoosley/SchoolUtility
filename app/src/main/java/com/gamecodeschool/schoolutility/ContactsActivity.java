@@ -64,6 +64,7 @@ public class ContactsActivity extends AppCompatActivity
                    }
                }
        );
+
     }
 
     @Override
