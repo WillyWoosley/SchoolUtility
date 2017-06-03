@@ -34,6 +34,10 @@ public class DialogAssignClass extends DialogFragment {
         builder.setView(dialogView);
         mClassesLed = getArguments().getStringArrayList("classesLed");
 
+        if (mClassesLed.size()==0) {
+            dismiss();
+        }
+
         Button btnOk = (Button) dialogView.findViewById(R.id.assignClassOk);
         Button btnCancel = (Button) dialogView.findViewById(R.id.assignClassCancel);
 

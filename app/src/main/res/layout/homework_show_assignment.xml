@@ -37,7 +37,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/ok_button"
@@ -46,7 +48,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_alignTop="@id/cancel_button"
-        android:text="Done" />
+        android:text="Done"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <TextView
         android:id="@+id/show_due_date"

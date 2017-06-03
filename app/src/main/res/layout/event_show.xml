@@ -53,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/eventShowTime"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"
         android:text="OK" />
 
 

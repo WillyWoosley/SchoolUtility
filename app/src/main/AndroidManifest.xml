@@ -30,6 +30,9 @@
         <activity android:name=".ContactsActivity"
             android:label="@string/contacts"
             android:screenOrientation="portrait"/>
+        <activity android:name=".SettingActivity"
+            android:label="Settings"
+            android:screenOrientation="portrait"/>
         <activity android:name=".CollectionAnnouncementActivity"></activity>
 
     </application>

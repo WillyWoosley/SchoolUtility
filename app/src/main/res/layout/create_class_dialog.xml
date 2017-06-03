@@ -109,6 +109,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:text="Continue"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"
         />
 
     <!--TODO: Perhaps include the option here to spceify more about your class, such as icon to be displayed with homework, or a short text blurb about it. Easy to implement later on, simple entry and retrieval-->

@@ -110,21 +110,6 @@ public class MainActivity extends AppCompatActivity
         ListView listEvents = (ListView) findViewById(R.id.mainEventListViewDisplay);
         listEvents.setAdapter(mEventAdapter);
 
-
-        listAssignment.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //Creates reference to clicked assignment
-                        HomeworkAssignment tempAssignment = mHomeworkAdapter.getItem(position);
-                        //Then creates show dialog, passes assignment reference, and inflates
-                        DialogShowHomework showHomework = new DialogShowHomework();
-                        showHomework.sendHomework(tempAssignment);
-                        showHomework.show(getFragmentManager(), "");
-                    }
-                }
-        );
-
         mAuthStateListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -135,7 +120,6 @@ public class MainActivity extends AppCompatActivity
                     //Original
                     //onSignedInInitialize(user.getDisplayName(), userUid);
                     onSignedInInitialize(user);
-                    Toast.makeText(MainActivity.this, "Welcome to Puma Planner", Toast.LENGTH_SHORT).show();
                 } else {
                     //Initiates account creation/login if the user is not logged in
                     //TODO: Specify a custom theme to be used here, once we have a custom theme for the rest of the app
@@ -224,8 +208,6 @@ public class MainActivity extends AppCompatActivity
                                     //Dialogs which will appear and handle user input/validation for leaders and teachers
                                     DialogAreTeacher areTeacher = new DialogAreTeacher();
                                     areTeacher.show(getFragmentManager(), "");
-                                    DialogAreLeader areLeader = new DialogAreLeader();
-                                    areLeader.show(getFragmentManager(), "");
 
                                     //TODO: Create a storage repository of images, and randomly select one to be set as a users badge profile, except for maybe not teachers
                                 }

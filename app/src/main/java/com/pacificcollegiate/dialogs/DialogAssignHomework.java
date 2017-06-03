@@ -71,8 +71,6 @@ public class DialogAssignHomework extends DialogFragment {
         final EditText assignDescript = (EditText) dialogView.findViewById(R.id.assign_homework_description);
         final EditText assignDate = (EditText) dialogView.findViewById(R.id.assign_due_date);
 
-        Toast.makeText(getActivity(), mClassName, Toast.LENGTH_LONG).show();
-
         //Progress/Regress buttons
         Button btnCancel = (Button) dialogView.findViewById(R.id.assign_description_cancel);
         Button btnContinue = (Button) dialogView.findViewById(R.id.assign_description_continue);

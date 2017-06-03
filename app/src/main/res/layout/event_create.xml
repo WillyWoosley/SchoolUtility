@@ -9,14 +9,18 @@
         android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel" />
+        android:text="Cancel"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/buttonOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="Ok"/>
+        android:text="Ok"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
     <android.support.design.widget.TextInputLayout

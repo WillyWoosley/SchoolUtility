@@ -128,7 +128,9 @@
         android:layout_height="wrap_content"
         android:text="@string/ok"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <TextView
         android:layout_width="wrap_content"

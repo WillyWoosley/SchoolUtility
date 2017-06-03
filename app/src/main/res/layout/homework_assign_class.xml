@@ -77,7 +77,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_below="@id/classAssignSixth"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/assignClassCancel"
@@ -85,6 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_below="@id/classAssignSixth"
-        android:text="Cancel"/>
+        android:text="Cancel"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </RelativeLayout>

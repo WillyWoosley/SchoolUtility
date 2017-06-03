@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView6"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Contact Name"
-        android:textSize="24sp" />
+            android:textColor="@android:color/black"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="15dp"
+    android:text="Contact Name"
+    android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/showContactEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="person_email"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:textSize="18sp"
-        android:layout_below="@id/textView6"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"/>
-        android:textColor="@android:color/black"
-        />
+            android:textColor="@android:color/black"
+    android:id="@+id/contactEmail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="email@email.com"
+    android:textSize="18sp"
+    android:layout_below="@id/textView6"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/showContactOk"
+        android:id="@+id/okContactDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ok"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/contactEmail"
-        android:layout_centerHorizontal="true" />
+            android:text="@string/ok"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/contactEmail"
+            android:layout_centerHorizontal="true"
+        android:textColor="@color/foreground_material_light"
+        style="?android:attr/borderlessButtonStyle"/>
 </RelativeLayout>
